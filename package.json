@@ -2,27 +2,36 @@
   "name": "small-recorder-new",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
-    "@types/jest": "^24.9.1",
-    "@types/node": "^12.12.30",
-    "@types/react": "^16.9.23",
-    "@types/react-dom": "^16.9.5",
-    "react": "^16.13.0",
-    "react-dom": "^16.13.0",
-    "react-scripts": "3.4.0",
-    "typescript": "^3.7.5"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "react-app-rewired start",
+    "build": "cross-env REACT_APP_STAGING_FLAG=1 react-app-rewired build",
+    "build:prod": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "test:nowatch": "cross-env CI=true react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
+    "docs": "typedoc --out ./docs --target ES6 --mode file ./src/helpers ./src/types ./src/models ./src/services"
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsc --noEmit && lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/*": "prettier --write",
+    "*.{css,scss}": "stylelint --fix",
+    "*.{ts,tsx}": [
+      "eslint --fix --ignore-pattern '*.config.js'",
+      "git add"
+    ]
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!(ramda|date-fns)/)"
+    ]
+  },
+  "engines": {
+    "node": "12.16.1"
   },
   "browserslist": {
     "production": [
@@ -35,5 +44,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "dependencies": {
+    "@testing-library/jest-dom": "4.2.4",
+    "@testing-library/react": "9.5.0",
+    "@testing-library/user-event": "7.2.1",
+    "@types/jest": "24.9.1",
+    "@types/node": "12.12.30",
+    "@types/react": "16.9.23",
+    "@types/react-dom": "16.9.5",
+    "react": "16.13.0",
+    "react-dom": "16.13.0",
+    "react-scripts": "3.4.0",
+    "typescript": "3.7.5"
+  },
+  "devDependencies": {
+    "react-app-rewired": "2.1.5",
+    "typedoc": "0.17.1"
   }
 }

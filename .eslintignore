@@ -1,0 +1,3 @@
+docs/**/**
+**.config.js
+src/serviceWorker.ts
