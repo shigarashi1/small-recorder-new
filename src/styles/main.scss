@@ -1,0 +1,23 @@
+@import './_reset.scss';
+@import './_variables';
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: $bg-color;
+  width: 100vw;
+  height: 100vh;
+}
+
+// ====================================================
+// material-ui overwrite
+// ====================================================
+.MuiOutlinedInput-root {
+  .MuiOutlinedInput-input {
+    padding: 10px 7px;
+  }
+}
