@@ -41,5 +41,18 @@ module.exports = {
     quotes: ["error", "single", { avoidEscape: true }],
     "@typescript-eslint/semi": ["error", "always"],
     "no-var": "error"
+  },
+  settings: {
+    "import/resolver": {
+      alias: {
+        map: [
+          ["@Components", "./src/presentation/components"],
+          ["@Events", "./src/presentation/events"],
+          ["@DomainModels", "./src/domain/models"],
+          ["@", "./src"]
+        ],
+        extensions: [".ts", ".tsx"]
+      }
+    }
   }
 };
