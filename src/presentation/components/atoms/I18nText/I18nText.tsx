@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useCallback } from 'react';
+import partial from 'ramda/es/partial';
 
-import { TI18nObj, TLangCode } from '../../../types';
-import { getText } from '../../../i18n';
+import { TI18nObj, TLangCode } from '@/presentation/types';
+import { getText } from '@/presentation/i18n';
 
 type TProps = {
   langCode: TLangCode;
-  i18nObj: TI18nObj | undefined;
+  i18nObj?: TI18nObj;
 };
 
 const INITIAL: TI18nObj = {
@@ -14,7 +15,8 @@ const INITIAL: TI18nObj = {
 };
 
 const I18nText: React.FC<TProps> = ({ langCode, i18nObj = INITIAL }) => {
-  return <React.Fragment>{getText(langCode, i18nObj)}</React.Fragment>;
+  const _getText = useCallback(partial(getText, [i18nObj]), [i18nObj]);
+  return <React.Fragment>{_getText(langCode)}</React.Fragment>;
 };
 
-export default I18nText;
+export { I18nText };
