@@ -1,5 +1,6 @@
-{
-  "extends": [
+module.exports = {
+  plugins: ["@typescript-eslint"],
+  extends: [
     "react-app",
     "eslint:recommended",
     // @typescript-eslint/eslint-plugin のおすすめルールを適用する
@@ -11,23 +12,34 @@
     // ※ extends 配列の一番最後に配置すること
     "plugin:prettier/recommended"
   ],
-  "plugins": ["@typescript-eslint"],
-  "parser": "@typescript-eslint/parser",
-  "parserOptions": {
-    "ecmaVersion": 2018,
-    "sourceType": "module",
-    "project": "./tsconfig.json"
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaVersion: 2018,
+    sourceType: "module",
+    project: "./tsconfig.json"
   },
-  "env": { "browser": true, "node": true, "es6": true },
-  "rules": {
+  env: { browser: true, node: true, es6: true },
+  rules: {
     // prettier
     // prettierのルールは効かなかったので、configに記載
-    "prettier/prettier": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        printWidth: 120,
+        singleQuote: true,
+        useTabs: false,
+        tabWidth: 2,
+        semi: true,
+        bracketSpacing: true,
+        trailingComma: "all",
+        arrowParens: "always"
+      }
+    ],
     // eslint
     "@typescript-eslint/explicit-function-return-type": "off",
-    "complexity": ["error", 4],
-    "quotes": ["error", "single", { "avoidEscape": true }],
+    complexity: ["error", 4],
+    quotes: ["error", "single", { avoidEscape: true }],
     "@typescript-eslint/semi": ["error", "always"],
     "no-var": "error"
   }
-}
+};

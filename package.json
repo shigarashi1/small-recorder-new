@@ -8,7 +8,6 @@
     "build:prod": "react-app-rewired build",
     "test": "react-app-rewired test",
     "test:nowatch": "cross-env CI=true react-app-rewired test",
-    "eject": "react-app-rewired eject",
     "analyze": "npm run build && source-map-explorer 'build/static/js/*.js'",
     "docs": "typedoc --out ./docs --target ES6 --mode file ./src/helpers ./src/types ./src/models ./src/services"
   },
@@ -20,7 +19,7 @@
   "lint-staged": {
     "*.{css,scss}": "stylelint --fix",
     "src/**/*.{ts,tsx}": [
-      "eslint --fix --ignore-pattern '*.config.js'",
+      "eslint --fix",
       "git add"
     ]
   },
@@ -60,6 +59,12 @@
   },
   "devDependencies": {
     "@types/ramda": "0.26.44",
+    "@typescript-eslint/eslint-plugin": "2.24.0",
+    "@typescript-eslint/parser": "2.24.0",
+    "eslint": "6.8.0",
+    "eslint-config-prettier": "6.10.0",
+    "eslint-plugin-prettier": "3.1.2",
+    "prettier": "1.19.1",
     "react-app-rewired": "2.1.5",
     "typedoc": "0.17.1"
   }
