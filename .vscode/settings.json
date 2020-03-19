@@ -16,6 +16,8 @@
   },
   "path-autocomplete.pathMappings": {
     "@Components": "${folder}/src/presentation/components",
+    "@Events": "${folder}/src/presentation/events",
+    "@DomainModels": "${folder}/src/domain/models",
     "@": "${folder}/src"
   },
   "plantuml.render": "PlantUMLServer",

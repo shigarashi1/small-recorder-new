@@ -3,6 +3,8 @@
     "baseUrl": "src",
     "paths": {
       "@Components/*": ["./presentation/components/*"],
+      "@Events/*": ["./presentation/events/*"],
+      "@DomainModels/*": ["./domain/models"],
       "@/*": ["./*"]
     }
   }
