@@ -6,6 +6,7 @@ import omit from 'ramda/es/omit';
 import partial from 'ramda/es/partial';
 import { AppState } from '@/store';
 import { toArray } from '@/library/helpers';
+import { Observable, isObservable } from 'rxjs';
 
 // MEMO: anyを許容する
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -17,7 +18,7 @@ type TReceivedAction<T = any> = (v: T) => Action<any>;
 type TNext<T = any> = Action<any> | TReceivedAction<T> | Array<Action<any> | TReceivedAction<T>>;
 type TActionProps<T = any> = {
   previous?: Action<any> | Action<any>[];
-  asyncFunc: Promise<T>;
+  asyncFunc: Promise<T> | Observable<T>;
   next?: TNext<T>;
   error?: Action<any> | Action<any>[];
   complete?: Action<any> | Action<any>[];
@@ -47,7 +48,8 @@ const execute: Epic<AnyAction, Action<any>, AppState> = (action$, store) =>
   action$.pipe(
     ofAction(_actions.execute),
     mergeMap(async ({ payload }) => {
-      const res = await payload.asyncFunc.catch((err) => err);
+      const { asyncFunc } = payload;
+      const res = await (isObservable(asyncFunc) ? asyncFunc.toPromise() : asyncFunc).catch((err) => err);
       return { res, payload: omit(['execute'], payload) };
     }),
     concatMap(({ res, payload }) => {
