@@ -18,11 +18,12 @@ import { Logger } from '@/library/models/logger';
 //
 import { rootActions } from './_root/actions';
 import { config } from '@/configuration/config';
-import { sampleEpics } from '@/__sample';
 
 // reducers
 
 // epics
+import { sampleEpics } from '@/__sample';
+import { libraryEpics } from '@/library/redux-observable';
 
 // reducer
 export const reducers = combineReducers({
@@ -42,6 +43,7 @@ const rootReducer = (state: any, action: any) => {
 // epic
 const rootEpic = combineEpics(
   sampleEpics, //
+  libraryEpics,
 );
 const epicMiddleware = createEpicMiddleware<AnyAction, AnyAction, AppState>();
 const crashSentryReporter = (api: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: any) => {
