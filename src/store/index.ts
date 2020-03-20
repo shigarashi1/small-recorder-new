@@ -18,21 +18,23 @@ import { Logger } from '@/library/models/logger';
 //
 import { rootActions } from './_root/actions';
 import { config } from '@/configuration/config';
-
 // reducers
-
+import { entityReducers } from './entity';
+import { uiReducers } from './ui';
 // epics
 import { sampleEpics } from '@/__sample';
 import { libraryEpics } from '@/library/redux-observable';
 
+// MEMO: anyを許容する
+/* eslint-disable @typescript-eslint/no-explicit-any */
 // reducer
 export const reducers = combineReducers({
   router: connectRouter(history),
+  entity: entityReducers,
+  ui: uiReducers,
 });
 export type AppState = ReturnType<typeof reducers>;
 
-// MEMO: anyを許容する
-/* eslint-disable @typescript-eslint/no-explicit-any */
 const rootReducer = (state: any, action: any) => {
   if (action.type === rootActions.clearAllState.type) {
     state = undefined;

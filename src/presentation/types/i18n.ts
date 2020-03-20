@@ -1,5 +1,6 @@
+export const ELangCode = { Jp: 'jp', En: 'en' } as const;
 export type TI18nObj = {
-  jp: string;
-  en?: string;
+  [ELangCode.Jp]: string;
+  [ELangCode.En]?: string;
 };
 export type TLangCode = keyof TI18nObj;
