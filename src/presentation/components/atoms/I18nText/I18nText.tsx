@@ -19,4 +19,4 @@ const I18nText: React.FC<TProps> = ({ langCode, i18nObj = INITIAL }) => {
   return <React.Fragment>{_getText(langCode)}</React.Fragment>;
 };
 
-export { I18nText };
+export default I18nText;

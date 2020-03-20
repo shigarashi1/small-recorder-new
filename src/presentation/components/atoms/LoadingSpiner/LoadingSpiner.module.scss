@@ -1,0 +1,17 @@
+@import '../../../styles/variables';
+
+// @types
+#container {
+  z-index: 9999;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-color: rgba(38, 38, 39, 0.5);
+  line-height: 1.5em;
+  .progress {
+    position: absolute;
+  }
+}
