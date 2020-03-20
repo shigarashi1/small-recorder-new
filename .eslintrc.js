@@ -18,7 +18,7 @@ module.exports = {
     sourceType: "module",
     project: "./tsconfig.json"
   },
-  env: { browser: true, node: true, es6: true },
+  env: { browser: true, node: true, es6: true, jest: true },
   rules: {
     // prettier
     // prettierのルールは効かなかったので、configに記載
@@ -40,7 +40,12 @@ module.exports = {
     complexity: ["error", 4],
     quotes: ["error", "single", { avoidEscape: true }],
     "@typescript-eslint/semi": ["error", "always"],
-    "no-var": "error"
+    "no-var": "error",
+    "no-console": "error",
+    "no-restricted-imports": [
+      "error",
+      { paths: ["ramda"], patterns: ["!ramda/es/*"] }
+    ]
   },
   settings: {
     "import/resolver": {
