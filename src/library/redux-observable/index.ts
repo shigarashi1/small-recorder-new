@@ -27,7 +27,7 @@ type TActionProps<T = any> = {
 const unityAction = <T = any>(res: T, v: Action<any> | TReceivedAction<T>): Action<any> =>
   typeof v === 'function' ? v(res) : v;
 const unityActions = <T = any>(res: T, next?: TNext<T>): Action<T>[] =>
-  !next ? [] : Array.isArray(next) ? next.map(partial(unityAction, [res])) : [unityAction(res, next)];
+  !next ? [] : toArray(next).map(partial(unityAction, [res]));
 
 // actions
 const ac = actionCreatorFactory('[library/redux-observable]');
@@ -35,7 +35,6 @@ const _actions = {
   previous: ac<TActionProps>('previous'),
   execute: ac<Omit<TActionProps, 'previous'>>('execute'),
 };
-
 export const asyncFuncWithCallback = _actions.previous;
 
 const previous: Epic<AnyAction, Action<any>, AppState> = (action$, store) =>

@@ -4,5 +4,5 @@ import { languageModule } from './language';
 
 export const uiReducers = combineReducers({
   loading: loadingModule.reducer,
-  languageModule: languageModule.reducer,
+  language: languageModule.reducer,
 });

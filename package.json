@@ -70,7 +70,6 @@
     "redux": "4.0.5",
     "redux-observable": "1.2.0",
     "redux-sentry-middleware": "0.1.6",
-    "reselect": "4.0.0",
     "rxjs": "6.5.4",
     "typescript": "3.7.5",
     "typescript-fsa": "3.0.0",
