@@ -15,32 +15,35 @@ export type WrapAction<T extends (...args: any[]) => any> = Action<ActionParamet
 export type PromiseResolvedType<T> = T extends Promise<infer R> ? R : never;
 
 type TReceivedAction<T = any> = (v: T) => Action<any>;
-type TNext<T = any> = Action<any> | TReceivedAction<T> | Array<Action<any> | TReceivedAction<T>>;
+type TNextErrorType<T = any> = Action<any> | TReceivedAction<T> | Array<Action<any> | TReceivedAction<T>>;
 type TActionProps<T = any> = {
-  previous?: Action<any> | Action<any>[];
+  onPrevious?: Action<any> | Action<any>[];
   asyncFunc: Promise<T> | Observable<T>;
-  next?: TNext<T>;
-  error?: Action<any> | Action<any>[];
-  complete?: Action<any> | Action<any>[];
+  onNext?: TNextErrorType<T>;
+  onError?: TNextErrorType<T>;
+  onComplete?: Action<any> | Action<any>[];
 };
 
 const unityAction = <T = any>(res: T, v: Action<any> | TReceivedAction<T>): Action<any> =>
   typeof v === 'function' ? v(res) : v;
-const unityActions = <T = any>(res: T, next?: TNext<T>): Action<T>[] =>
+const unityActions = <T = any>(res: T, next?: TNextErrorType<T>): Action<T>[] =>
   !next ? [] : toArray(next).map(partial(unityAction, [res]));
 
 // actions
 const ac = actionCreatorFactory('[library/redux-observable]');
 const _actions = {
   previous: ac<TActionProps>('previous'),
-  execute: ac<Omit<TActionProps, 'previous'>>('execute'),
+  execute: ac<Omit<TActionProps, 'onPrevious'>>('execute'),
 };
 export const asyncFuncWithCallback = _actions.previous;
 
 const previous: Epic<AnyAction, Action<any>, AppState> = (action$, store) =>
   action$.pipe(
     ofAction(_actions.previous),
-    concatMap(({ payload }) => [...toArray(payload?.previous || []), _actions.execute(omit(['previous'], payload))]),
+    concatMap(({ payload }) => [
+      ...toArray(payload?.onPrevious || []),
+      _actions.execute(omit(['onPrevious'], payload)),
+    ]),
   );
 
 const execute: Epic<AnyAction, Action<any>, AppState> = (action$, store) =>
@@ -52,11 +55,11 @@ const execute: Epic<AnyAction, Action<any>, AppState> = (action$, store) =>
       return { res, payload: omit(['execute'], payload) };
     }),
     concatMap(({ res, payload }) => {
-      const completeActions = toArray(payload?.complete || []);
+      const completeActions = toArray(payload?.onComplete || []);
       if (res instanceof Error) {
-        return [...toArray(payload?.error || []), ...completeActions];
+        return [...unityActions(payload.onError), ...completeActions];
       }
-      return [...unityActions(payload.next), ...completeActions];
+      return [...unityActions(payload.onNext), ...completeActions];
     }),
   );
 
