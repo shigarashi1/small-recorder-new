@@ -1,7 +1,7 @@
 export const ERROR_MESSAGE = {
   E0000: {
-    jp: '',
-    en: '',
+    jp: '認証情報の取得に失敗しました.',
+    en: 'failed to acquire the authentification.',
   },
   E0001: {
     jp: '',
