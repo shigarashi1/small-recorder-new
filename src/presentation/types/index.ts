@@ -1,3 +1,4 @@
+// Lang
 export const ELangCode = { Jp: 'jp', En: 'en' } as const;
 export type TI18nObj = {
   [ELangCode.Jp]: string;

@@ -1,9 +1,10 @@
-import { TBase } from './base';
+import { TBaseDomainModel } from './base';
 import { NestedPartial } from '@/library/types';
 
-type TCategory = TBase & {
-  uid: string;
-  username: string;
+type TCategory = TBaseDomainModel & {
+  userId: string;
+  name: string;
+  hasDeleted: boolean;
 };
 
 export type Category = Readonly<TCategory>;

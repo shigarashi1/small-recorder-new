@@ -1,7 +1,7 @@
-import { TBase } from './base';
+import { TBaseDomainModel } from './base';
 import { NestedPartial } from '@/library/types';
 
-type TRecord = TBase & {
+type TRecord = TBaseDomainModel & {
   userId: string;
   categoryId: string;
   date: string;
