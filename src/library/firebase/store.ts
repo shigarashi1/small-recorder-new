@@ -62,6 +62,8 @@ type ChangedParameter<T extends TBaseDomainModel> = {
 };
 
 export type DocGetOptions<T extends TBaseDomainModel> = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  canStart: boolean;
   conditions?: DocRefColumn<T> | DocRefColumn<T>[];
   orders?: DocOrderColumn<T> | DocOrderColumn<T>[];
 };
@@ -128,16 +130,10 @@ export const onChanged = <T extends TBaseDomainModel>(
   collectionName: TCollectionName,
   toDomainModel: ModelConvFunc<T>,
   observable: ChangedParameter<T>,
-  options?: {
-    conditions?: DocRefColumn<T> | DocRefColumn<T>[];
-    orders?: DocOrderColumn<T> | DocOrderColumn<T>[];
-  },
+  options?: DocGetOptions<T>,
 ): typeof voidFunction => {
-  // TODO: 取得条件を記載する
-  if (!options) {
-    return () => {
-      Logger.log('called voidFunction');
-    };
+  if (!!options && !options.canStart) {
+    return voidFunction;
   }
   return setCondtions(options)(getCollection(collectionName)).onSnapshot(
     pipe(toObjectArray(toDomainModel), observable.onNext),
@@ -167,10 +163,7 @@ export const createDoc = async <T extends TBaseDomainModel>(
 export const readDocs = async <T extends TBaseDomainModel>(
   collectionName: TCollectionName,
   toDomainModel: ModelConvFunc<T>,
-  options?: {
-    conditions?: DocRefColumn<T> | DocRefColumn<T>[];
-    orders?: DocOrderColumn<T> | DocOrderColumn<T>[];
-  },
+  options?: DocGetOptions<T>,
 ): Promise<T[] | ApiError> =>
   setCondtions(options)(getCollection(collectionName))
     .get()
