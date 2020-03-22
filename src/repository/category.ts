@@ -3,8 +3,16 @@ import partial from 'ramda/es/partial';
 import partialRight from 'ramda/es/partialRight';
 
 import { Category } from '@/domain/models/category';
-import { QueryDocSnapshot, toDate, ECollectionName, DocData, toDocRef } from '@/library/firebase';
-import { DocGetOptions, TCreateDocConfig, getRepositoryFunctions } from '@/library/firebase/store';
+import {
+  DocGetOptions,
+  TCreateDocConfig,
+  getRepositoryFunctions,
+  QueryDocSnapshot,
+  DocData,
+  toDate,
+  toDocRef,
+  ECollectionName,
+} from '@/library/firebase/store';
 
 const toCategory = (v: QueryDocSnapshot | DocData): Category => ({
   id: v.id,

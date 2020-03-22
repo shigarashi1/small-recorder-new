@@ -1,3 +1,5 @@
+import firebase from './import';
+
 import prop from 'ramda/es/prop';
 import omit from 'ramda/es/omit';
 import partial from 'ramda/es/partial';
@@ -10,17 +12,38 @@ import { TBaseDomainModel } from '@/domain/models/base';
 import { ApiError } from '@/library/models/error';
 import { toArray } from '@/library/helpers';
 import { Logger } from '@/library/models/logger';
-import {
-  QueryDocSnapshot,
-  DocData,
-  QuerySnapshot,
-  CollectionRef,
-  Query,
-  TCollectionName,
-  getCollection,
-  getServerTime,
-  DocRef,
-} from '.';
+import { db } from '.';
+
+// スキーマ名を指定する
+export const ECollectionName = {
+  Users: 'users',
+  Categories: 'categories',
+  Targets: 'targets',
+  Records: 'records',
+} as const;
+export type TCollectionName = typeof ECollectionName[keyof typeof ECollectionName];
+
+// 階層下げる必要があれば指定
+const dbPath = 'api/v1';
+
+// types
+const collection = db.collection('_');
+export type QueryListener = ReturnType<typeof collection.onSnapshot>;
+export type Query = ReturnType<typeof collection.where>;
+export type ServerTimestamp = ReturnType<typeof firebase.firestore.FieldValue.serverTimestamp>;
+export type QueryDocSnapshot = firebase.firestore.QueryDocumentSnapshot;
+export type QuerySnapshot = firebase.firestore.QuerySnapshot;
+export type DocData = firebase.firestore.DocumentData;
+export type DocRef = firebase.firestore.DocumentReference;
+export type CollectionRef = firebase.firestore.CollectionReference;
+export type TimeStamp = firebase.firestore.Timestamp;
+
+export const getCollection = (collectionName: TCollectionName): CollectionRef =>
+  db.collection(`${[dbPath, collectionName].join('/')}`);
+export const toDocRef = (collectionName: TCollectionName, id: string) => getCollection(collectionName).doc(id);
+export const getServerTime = (): ServerTimestamp => firebase.firestore.FieldValue.serverTimestamp();
+export const toDate = (date?: { seconds: number; nanoseconds: number }): Date =>
+  date ? new firebase.firestore.Timestamp(date.seconds, date.nanoseconds).toDate() : new Date();
 
 type ModelConvFunc<T extends TBaseDomainModel> = (v: QueryDocSnapshot | DocData) => T;
 type DocRefColumn<T extends TBaseDomainModel> = {
