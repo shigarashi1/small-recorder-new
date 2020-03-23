@@ -1,0 +1,24 @@
+// @types
+#root {
+  width: 100%;
+  .list {
+    > li {
+      padding: 0;
+    }
+    .label {
+      display: flex;
+      justify-content: flex-start;
+    }
+    .text {
+      // padding-left: 20px;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}
+
+// .MuiList-root {
+//   .MuiListItem-root {
+//     font-size: large;
+//   }
+// }
