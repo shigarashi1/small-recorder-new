@@ -20,6 +20,7 @@
     "@DomainModels": "${folder}/src/domain/models",
     "@": "${folder}/src"
   },
+  "typescript.tsserver.pluginPaths": ["typescript-plugin-css-modules"],
   "plantuml.render": "PlantUMLServer",
   "plantuml.server": "https://www.plantuml.com/plantuml/",
   "eslint.alwaysShowStatus": true
