@@ -16,7 +16,7 @@ import * as Sentry from '@sentry/browser';
 import history from '@/root/history';
 import { Logger } from '@/library/models/logger';
 //
-import { rootActions } from './_root/actions';
+import { rootActions } from '@/root/actions';
 import { config } from '@/configuration/config';
 // reducers
 import { entityReducers } from './entity';
