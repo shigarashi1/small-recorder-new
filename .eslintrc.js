@@ -1,5 +1,5 @@
 module.exports = {
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "import"],
   extends: [
     "react-app",
     "eslint:recommended",
@@ -37,9 +37,11 @@ module.exports = {
     ],
     // eslint
     "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/semi": ["error", "always"],
     complexity: ["error", 4],
     quotes: ["error", "single", { avoidEscape: true }],
-    "@typescript-eslint/semi": ["error", "always"],
+    // turn on errors for missing imports
+    "import/no-unresolved": "error",
     "no-var": "error",
     "no-console": "error",
     "no-restricted-imports": [
@@ -48,7 +50,14 @@ module.exports = {
     ]
   },
   settings: {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
+    },
     "import/resolver": {
+      // use <root>/tsconfig.json
+      typescript: {
+        alwaysTryTypes: true // always try to resolve types under `<roo/>@types` directory even it doesn't contain any source code, like `@types/unist`
+      },
       alias: {
         map: [
           ["@Components", "./src/presentation/components"],
