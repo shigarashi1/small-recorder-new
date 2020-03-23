@@ -10,6 +10,12 @@ export type TApplicationListData = {
   meta: TApplicationListMeta;
 };
 
+export type TApplicationDetailMeta = {};
+export type TApplicationDetailData = {
+  id: string;
+  meta: TApplicationDetailMeta;
+};
+
 export type TApplicationEditMeta = {};
 export type TApplicationEditData = {
   id: string;

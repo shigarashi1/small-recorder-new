@@ -8,7 +8,7 @@ import {
   AnyAction,
   Dispatch,
   MiddlewareAPI,
-} from 'redux';
+} from '@reduxjs/toolkit';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import createSentryMiddleware from 'redux-sentry-middleware';
 import * as Sentry from '@sentry/browser';
@@ -24,12 +24,14 @@ import { uiReducers } from './ui';
 // epics
 import { sampleEpics } from '@/__sample';
 import { libraryEpics } from '@/library/redux-observable';
+import { applicationReducers } from './application';
 
 // MEMO: anyを許容する
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // reducer
 export const reducers = combineReducers({
   router: connectRouter(history),
+  application: applicationReducers,
   entity: entityReducers,
   ui: uiReducers,
 });

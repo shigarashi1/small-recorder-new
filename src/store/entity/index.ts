@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import { usersModule } from './user';
 import { targetsModule } from './target';
 import { recordsModule } from './record';
