@@ -17,7 +17,7 @@ import {
 const toCategory = (v: QueryDocSnapshot | DocData): Category => ({
   id: v.id,
   userId: v.get('user').id,
-  name: String(v.data()),
+  name: String(v.data().name || ''),
   hasDeleted: Boolean(v.data().hasDeleted || false),
   createdAt: toDate(v.data().createdAt),
   updatedAt: toDate(v.data().updatedAt),
