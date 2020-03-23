@@ -44,7 +44,7 @@ const {
   updateDoc,
   deleteDocById,
   onChanged,
-} = getRepositoryFunctions<User, typeof toUser>(ECollectionName.Categories, toUser);
+} = getRepositoryFunctions<User, typeof toUser>(ECollectionName.Users, toUser);
 
 export const userRepositories = {
   createDoc: partial(createDoc, [config]),
