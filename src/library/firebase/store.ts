@@ -113,10 +113,10 @@ const _setOrderConditions = <T extends TBaseDomainModel>(
 const setCondtions = <T extends TBaseDomainModel>(options?: DocGetOptions<T>) =>
   pipe(
     partial<DocRefColumn<T>[], CollectionRef | Query, CollectionRef | Query>(_setQueryConditions, [
-      toArray(options?.conditions || []),
+      toArray(options?.conditions),
     ]),
     partial<DocOrderColumn<T>[], CollectionRef | Query, CollectionRef | Query>(_setOrderConditions, [
-      toArray(options?.orders || []),
+      toArray(options?.orders),
     ]),
   );
 

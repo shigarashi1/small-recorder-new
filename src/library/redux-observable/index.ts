@@ -40,10 +40,7 @@ export const asyncFuncWithCallback = _actions.previous;
 const previous: Epic<AnyAction, Action<any>, AppState> = (action$, store) =>
   action$.pipe(
     ofAction(_actions.previous),
-    concatMap(({ payload }) => [
-      ...toArray(payload?.onPrevious || []),
-      _actions.execute(omit(['onPrevious'], payload)),
-    ]),
+    concatMap(({ payload }) => [...toArray(payload?.onPrevious), _actions.execute(omit(['onPrevious'], payload))]),
   );
 
 const execute: Epic<AnyAction, Action<any>, AppState> = (action$, store) =>
@@ -55,7 +52,7 @@ const execute: Epic<AnyAction, Action<any>, AppState> = (action$, store) =>
       return { res, payload: omit(['execute'], payload) };
     }),
     concatMap(({ res, payload }) => {
-      const completeActions = toArray(payload?.onComplete || []);
+      const completeActions = toArray(payload?.onComplete);
       if (res instanceof Error) {
         return [...unityActions(payload.onError), ...completeActions];
       }
