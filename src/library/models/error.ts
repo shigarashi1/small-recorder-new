@@ -26,3 +26,5 @@ class BaseError extends Error {
 }
 
 export class ApiError extends BaseError {}
+export class SystemError extends BaseError {}
+export class ValidationError extends BaseError {}
