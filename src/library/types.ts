@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ERROR_MESSAGE } from '@/presentation/i18n/message';
 
 export type IndexesObject<T = any> = { [key: string]: T };
@@ -7,11 +8,11 @@ export type NestedPartial<T> = {
 
 // Error
 export type TErrorCode = keyof typeof ERROR_MESSAGE;
-export type TErrorPartial = {
-  errorCode?: TErrorCode;
-  code?: string;
-  message?: string;
-  stack?: string;
-  params?: string[];
+export type TError = {
+  errorCode: TErrorCode;
+  code: string;
+  message: string;
+  stack: string;
+  params: string[];
 };
-export type TError = Required<TErrorPartial>;
+export type TErrorPartial = NestedPartial<TError>;
