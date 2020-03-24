@@ -1,12 +1,12 @@
 /* eslint-disable complexity, @typescript-eslint/no-explicit-any  */
-import { TError, TErrorCode } from '../types';
+import { TErrorPartial, TErrorCode } from '../types';
 import { ERROR_MESSAGE } from '@/presentation/i18n/message';
 
 const isErrorCode = (v: any): v is TErrorCode =>
   typeof v === 'string' && !Object.keys(ERROR_MESSAGE).find((code) => code === v);
 
 class BaseError extends Error {
-  protected readonly _error: TError;
+  protected readonly _error: TErrorPartial;
 
   get error() {
     return this._error;

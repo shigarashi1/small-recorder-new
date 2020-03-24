@@ -7,10 +7,11 @@ export type NestedPartial<T> = {
 
 // Error
 export type TErrorCode = keyof typeof ERROR_MESSAGE;
-export type TError = {
+export type TErrorPartial = {
   errorCode?: TErrorCode;
   code?: string;
   message?: string;
   stack?: string;
   params?: string[];
 };
+export type TError = Required<TErrorPartial>;
