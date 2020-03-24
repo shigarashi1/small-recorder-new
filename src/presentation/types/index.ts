@@ -1,3 +1,5 @@
+import { OptionsObject } from 'notistack';
+
 // Lang
 export const ELangCode = { Jp: 'jp', En: 'en' } as const;
 export type TI18nObj = {
@@ -25,4 +27,12 @@ export type TOkCancelDialog = TBaseDialog & {
 export type TYesNoDialog = TBaseDialog & {
   yes: () => void;
   no: () => void;
+};
+
+// Snackbar
+export type TNotifierProps = {
+  id: string;
+  message: string;
+  hasDismissed?: boolean;
+  options?: Omit<OptionsObject, 'key'>;
 };
