@@ -10,3 +10,6 @@ export const loadingSelector = {
 export const languageSelector = {
   langCode: createSelector(featureSelector, (state) => state.language.langCode),
 };
+export const notifierSelector = {
+  notifierProps: createSelector(featureSelector, (state) => state.notifier),
+};
