@@ -1,0 +1,10 @@
+// @types
+#container {
+  > div {
+    width: 100%;
+    height: 38px;
+  }
+  > label {
+    margin-top: -5px;
+  }
+}

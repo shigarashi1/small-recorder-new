@@ -46,7 +46,7 @@ module.exports = {
     "no-console": "error",
     "no-restricted-imports": [
       "error",
-      { paths: ["ramda"], patterns: ["!ramda/es/*"] }
+      { paths: ["ramda", "date-fns"], patterns: ["!ramda/es/*", "!date-fns/*"] }
     ]
   },
   settings: {
