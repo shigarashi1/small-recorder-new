@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSnackbar, CloseReason } from 'notistack';
 import { useSelector, useDispatch } from 'react-redux';
@@ -52,7 +53,7 @@ const Notifier: React.FC<{}> = () => {
         onExit: (handler: any) => {
           dismiss(id);
         },
-        action: (v: string) => <Button onClick={onDismiss(id)}>OK</Button>,
+        action: (v: string) => <Button onClick={onDismiss(v)}>OK</Button>,
       });
     });
   }, [enqueueSnackbar, closeSnackbar, notifierProps, displayedIds, dismiss, onDismiss]);
