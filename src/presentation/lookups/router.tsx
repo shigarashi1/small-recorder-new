@@ -1,8 +1,7 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
-
-import TopPage from '../pages/TopPage/TopPage';
 import { TI18nObj } from '../types';
+import TopPage from '../pages/TopPage/TopPage';
 import HomePage from '../pages/HomePage/HomePage';
 import ManualPage from '../pages/ManualPage/ManualPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
