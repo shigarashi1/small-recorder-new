@@ -1,13 +1,29 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useEffect, useState, useCallback } from 'react';
-import { useSnackbar, CloseReason } from 'notistack';
+import { useSnackbar, CloseReason, OptionsObject } from 'notistack';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
 import { notifierSelector } from '@/application/selector/ui';
 import { notifierModule } from '@/store/ui/notifier';
 
+const addDefaultOptions = (dismiss: (v: string) => void, id: string, options?: OptionsObject): OptionsObject => ({
+  ...options,
+  key: id,
+  variant: options?.variant || 'default',
+  autoHideDuration: options?.autoHideDuration || 2000,
+  onClose: (event: React.SyntheticEvent<any> | null, reason: CloseReason) => {
+    if (options?.onClose) {
+      options.onClose(event, reason, id);
+    }
+  },
+  onExit: (handler: any) => {
+    dismiss(id);
+  },
+});
+
 const Notifier: React.FC<{}> = () => {
+  const [displayedIds, setDisplayedIds] = useState<string[]>([]);
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   //
   const notifierProps = useSelector(notifierSelector.notifierProps);
@@ -19,12 +35,10 @@ const Notifier: React.FC<{}> = () => {
     [dispatch],
   );
   //
+  const addDisplayed = useCallback((v: string) => setDisplayedIds([...displayedIds, v]), [displayedIds]);
   const onDismiss = useCallback((id: string) => () => dismiss(id), [dismiss]);
-  const [displayedIds, setDisplayedIds] = useState<string[]>([]);
   //
   useEffect(() => {
-    const addDisplayed = (v: string) => setDisplayedIds([...displayedIds, v]);
-    // eslint-disable-next-line complexity
     notifierProps.forEach(({ id, message, options = {}, hasDismissed = false }) => {
       if (hasDismissed) {
         closeSnackbar(id);
@@ -41,22 +55,11 @@ const Notifier: React.FC<{}> = () => {
 
       // Display snackbar using notistack
       enqueueSnackbar(message, {
-        ...options,
-        key: id,
-        variant: options.variant || 'default',
-        autoHideDuration: options.autoHideDuration || 2000,
-        onClose: (event: React.SyntheticEvent<any> | null, reason: CloseReason) => {
-          if (options.onClose) {
-            options.onClose(event, reason, id);
-          }
-        },
-        onExit: (handler: any) => {
-          dismiss(id);
-        },
+        ...addDefaultOptions(dismiss, id, options),
         action: (v: string) => <Button onClick={onDismiss(v)}>OK</Button>,
       });
     });
-  }, [enqueueSnackbar, closeSnackbar, notifierProps, displayedIds, dismiss, onDismiss]);
+  }, [enqueueSnackbar, closeSnackbar, notifierProps, displayedIds, dismiss, onDismiss, addDisplayed]);
 
   return null;
 };
