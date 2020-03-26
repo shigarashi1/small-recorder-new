@@ -2,7 +2,7 @@ import pipe from 'ramda/es/pipe';
 import partial from 'ramda/es/partial';
 import partialRight from 'ramda/es/partialRight';
 
-import { User } from '@/domain/models/user';
+import { User } from '@DomainModels/user';
 import {
   DocGetOptions,
   TCreateDocConfig,

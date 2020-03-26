@@ -2,7 +2,7 @@ import pipe from 'ramda/es/pipe';
 import partial from 'ramda/es/partial';
 import partialRight from 'ramda/es/partialRight';
 
-import { Category } from '@/domain/models/category';
+import { Category } from '@DomainModels/category';
 import {
   DocGetOptions,
   TCreateDocConfig,

@@ -8,7 +8,7 @@ import {
   toDocRef,
   TCreateDocConfig,
 } from '@/library/firebase/store';
-import { Record } from '@/domain/models/record';
+import { Record } from '@DomainModels/record';
 import partial from 'ramda/es/partial';
 import pipe from 'ramda/es/pipe';
 import partialRight from 'ramda/es/partialRight';

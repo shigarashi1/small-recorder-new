@@ -2,7 +2,7 @@ import pipe from 'ramda/es/pipe';
 import partial from 'ramda/es/partial';
 import partialRight from 'ramda/es/partialRight';
 
-import { Target, ETargetTerm } from '@/domain/models/target';
+import { Target, ETargetTerm } from '@DomainModels/target';
 import {
   DocGetOptions,
   TCreateDocConfig,

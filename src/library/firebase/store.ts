@@ -8,7 +8,7 @@ import head from 'ramda/es/head';
 import pipe from 'ramda/es/pipe';
 import map from 'ramda/es/map';
 
-import { TBaseDomainModel } from '@/domain/models/base';
+import { TBaseDomainModel } from '@DomainModels/base';
 import { ApiError } from '@/library/models/error';
 import { toArray } from '@/library/helpers';
 import { Logger } from '@/library/models/logger';

@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Target } from '@/domain/models/target';
+import { Target } from '@DomainModels/target';
 import { TEntityData } from '../types';
 import { mergeAndUniqArray } from '@/library/helpers';
 import { addEntityMeta } from '../helpers';
