@@ -37,14 +37,14 @@ export const EPath = {
 type PathProps = keyof typeof EPath;
 export type TPath = typeof EPath[PathProps];
 
-export const Title: Record<PathProps, TI18nObj> = {
+export const BROWSER_TITLE: Record<PathProps, TI18nObj> = {
   Top: { jp: 'トップ', en: 'Top' },
   Login: { jp: 'ログイン', en: 'Login' },
   SignUp: { jp: 'ユーザー登録', en: 'SignUp' },
   PasswordReset: { jp: 'パスワードリセット', en: 'Password Reset' },
   Manual: { jp: '使い方', en: 'Manual' },
   Technology: { jp: '技術情報', en: 'Technology' },
-  Forbidden: { jp: '不正なアクセス', en: 'Forbidden' },
+  Forbidden: { jp: 'ログインが必要です', en: 'Forbidden' },
   NotFound: { jp: 'お探しのページがありません', en: 'NotFound' },
   Sample: { jp: 'サンプル', en: 'Sample' },
   Home: { jp: 'ホーム', en: 'Home' },
@@ -75,8 +75,6 @@ type TRouter = {
   icon?: TIcon;
   showSidebar?: boolean;
   isDisableLoggedIn?: boolean;
-  // sidebar & brouserTab
-  title?: PathProps;
 };
 type TRouterConfig = { pathProps: PathProps } & TRouter;
 

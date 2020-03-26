@@ -8,6 +8,7 @@ import Notifier from '@/presentation/backgrounds/Notifier';
 import ErrorBoundary from '@Components/others/ErrorBoundary/ErrorBoundary';
 import AppRouter from '@/presentation/routers/AppRouter';
 import MainTemplate from '@/presentation/templates/MainTemplate/MainTemplate';
+import BrowserTab from '@/presentation/backgrounds/BrowserTab';
 
 const store = configureStore({});
 const App: React.FC = () => {
@@ -20,6 +21,7 @@ const App: React.FC = () => {
           </MainTemplate>
           <ErrorBoundary>
             <Notifier />
+            <BrowserTab />
           </ErrorBoundary>
         </SnackbarProvider>
       </ConnectedRouter>
