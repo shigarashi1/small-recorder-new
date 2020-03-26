@@ -62,17 +62,19 @@ type ChangedParameter<T extends TBaseDomainModel> = {
 };
 
 export type DocGetOptions<T extends TBaseDomainModel> = {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  canStart: boolean;
+  canSubscription: boolean;
   conditions?: DocRefColumn<T> | DocRefColumn<T>[];
   orders?: DocOrderColumn<T> | DocOrderColumn<T>[];
 };
-export type TCreateDocConfig<T extends TBaseDomainModel> = {
-  propName: keyof Omit<T, 'id' | 'createdAt' | 'updatedAt'>;
+
+type DocConfig = {
   rename?: string;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   toConv?: (v: any) => any;
-}[];
+};
+export type TCreateDocConfig<T extends TBaseDomainModel> = Partial<
+  Record<keyof Omit<T, 'id' | 'createdAt' | 'updatedAt'>, DocConfig>
+>;
 
 const voidFunction = () => {
   Logger.log('called voidFunction');
@@ -121,7 +123,8 @@ const setCondtions = <T extends TBaseDomainModel>(options?: DocGetOptions<T>) =>
   );
 
 const toDocObject = <T extends TBaseDomainModel>(config: TCreateDocConfig<T>, model: T) =>
-  config.reduce((obj, { propName, rename, toConv }) => {
+  Object.entries(config).reduce((obj, conf) => {
+    const [propName, { rename, toConv }] = conf as [keyof T, DocConfig];
     const value = prop(propName, model);
     return { ...obj, [rename ? rename : propName]: toConv ? toConv(value) : value };
   }, {});
@@ -132,7 +135,7 @@ export const onChanged = <T extends TBaseDomainModel>(
   observable: ChangedParameter<T>,
   options?: DocGetOptions<T>,
 ): typeof voidFunction => {
-  if (!!options && !options.canStart) {
+  if (!!options && !options.canSubscription) {
     return voidFunction;
   }
   return setCondtions(options)(getCollection(collectionName)).onSnapshot(
@@ -150,6 +153,7 @@ export const createDoc = async <T extends TBaseDomainModel>(
 ): Promise<T | ApiError> => {
   const serverTime = getServerTime();
   const data = {
+    ...omit(['id', 'createdAt', 'updatedAt'], model),
     ...toDocObject(config, model),
     createdAt: serverTime,
     updatedAt: serverTime,

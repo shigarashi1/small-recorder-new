@@ -25,29 +25,21 @@ const toTarget = (v: QueryDocSnapshot | DocData): Target => ({
 });
 
 const getReadOptions = (userId: string): DocGetOptions<Target> => ({
-  canStart: !!userId,
+  canSubscription: !!userId,
   conditions: [{ fieldPath: 'user', opStr: '==', ref: toDocRef(ECollectionName.Users, userId) }],
   orders: [{ fieldPath: 'createdAt' }],
 });
 
-const config: TCreateDocConfig<Target> = [
-  {
-    propName: 'userId',
+const config: TCreateDocConfig<Target> = {
+  userId: {
     rename: 'user',
     toConv: partial(toDocRef, [ECollectionName.Users]),
   },
-  {
-    propName: 'categoryId',
+  categoryId: {
     rename: 'category',
     toConv: partial(toDocRef, [ECollectionName.Categories]),
   },
-  {
-    propName: 'count',
-  },
-  {
-    propName: 'term',
-  },
-];
+};
 
 const {
   createDoc, //

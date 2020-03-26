@@ -29,7 +29,7 @@ type TReadOption = {
   from: string;
 };
 const getReadOptions = (v: TReadOption): DocGetOptions<Record> => ({
-  canStart: !!v.userId && !!v.from && !!v.to,
+  canSubscription: !!v.userId && !!v.from && !!v.to,
   conditions: [
     { fieldPath: 'user', opStr: '==', ref: toDocRef(ECollectionName.Users, v.userId) },
     { fieldPath: 'date', opStr: '<=', ref: +v.to },
@@ -41,25 +41,19 @@ const getReadOptions = (v: TReadOption): DocGetOptions<Record> => ({
   ],
 });
 
-const config: TCreateDocConfig<Record> = [
-  {
-    propName: 'userId',
+const config: TCreateDocConfig<Record> = {
+  userId: {
     rename: 'user',
     toConv: partial(toDocRef, [ECollectionName.Users]),
   },
-  {
-    propName: 'categoryId',
+  categoryId: {
     rename: 'category',
     toConv: partial(toDocRef, [ECollectionName.Categories]),
   },
-  {
-    propName: 'date',
+  date: {
     toConv: (v: string | number) => (typeof v === 'string' ? +v : v),
   },
-  {
-    propName: 'record',
-  },
-];
+};
 
 const {
   createDoc, //

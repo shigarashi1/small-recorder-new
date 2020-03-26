@@ -24,24 +24,17 @@ const toCategory = (v: QueryDocSnapshot | DocData): Category => ({
 });
 
 const getReadOptions = (userId: string): DocGetOptions<Category> => ({
-  canStart: !!userId,
+  canSubscription: !!userId,
   conditions: [{ fieldPath: 'user', opStr: '==', ref: toDocRef(ECollectionName.Users, userId) }],
   orders: [{ fieldPath: 'createdAt' }],
 });
 
-const config: TCreateDocConfig<Category> = [
-  {
-    propName: 'userId',
+const config: TCreateDocConfig<Category> = {
+  userId: {
     rename: 'user',
     toConv: partial(toDocRef, [ECollectionName.Users]),
   },
-  {
-    propName: 'name',
-  },
-  {
-    propName: 'hasDeleted',
-  },
-];
+};
 
 const {
   createDoc, //

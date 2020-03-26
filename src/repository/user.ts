@@ -23,19 +23,12 @@ const toUser = (v: QueryDocSnapshot | DocData): User => ({
 });
 
 const getReadOptions = (uid: string): DocGetOptions<User> => ({
-  canStart: !!uid,
+  canSubscription: !!uid,
   conditions: [{ fieldPath: 'uid', opStr: '==', ref: toDocRef(ECollectionName.Users, uid) }],
   orders: [{ fieldPath: 'createdAt' }],
 });
 
-const config: TCreateDocConfig<User> = [
-  {
-    propName: 'uid',
-  },
-  {
-    propName: 'username',
-  },
-];
+const config: TCreateDocConfig<User> = {};
 
 const {
   createDoc, //
