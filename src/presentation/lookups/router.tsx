@@ -1,8 +1,21 @@
 import React from 'react';
 import { RouteComponentProps } from 'react-router';
 
+import TopPage from '../pages/TopPage/TopPage';
 import { TI18nObj } from '../types';
-import ErrorBoundary from '@Components/others/ErrorBoundary/ErrorBoundary';
+import HomePage from '../pages/HomePage/HomePage';
+import ManualPage from '../pages/ManualPage/ManualPage';
+import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
+import TechnologyPage from '../pages/TechnologyPage/TechnologyPage';
+import ForbiddenPage from '../pages/ForbiddenPage/ForbiddenPage';
+import LoginPage from '../pages/LoginPage/LoginPage';
+import SignUpPage from '../pages/SignUpPage/SignUpPage';
+import PasswordResetPage from '../pages/PasswordResetPage/PasswordResetPage';
+import SamplePage from '../pages/SamplePage/SamplePage';
+import RecordPage from '../pages/RecordPage/RecordPage';
+import ReportPage from '../pages/ReportPage/ReportPage';
+import SearchPage from '../pages/SearchPage/SearchPage';
+import SettingPage from '../pages/SettingPage/SettingPage';
 
 export const EPath = {
   Top: '/',
@@ -14,7 +27,7 @@ export const EPath = {
   Forbidden: '/forbidden',
   NotFound: '/found-not',
   // sample
-  Sample: '/sample:mode',
+  Sample: '/sample/:mode',
   // private
   Home: '/private',
   MyRecord: '/private/records',
@@ -57,7 +70,7 @@ type TIcon =
 type TRouter = {
   exact?: boolean;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  component?: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
+  component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
   isPrivate?: boolean;
   // sidebar
   icon?: TIcon;
@@ -71,69 +84,83 @@ type TRouterConfig = { pathProps: PathProps } & TRouter;
 const ROUTER_CONFIG: Record<keyof typeof EPath, TRouter> = {
   Top: {
     exact: true,
-    component: ErrorBoundary,
+    component: TopPage,
   },
   Login: {
     exact: true,
+    component: LoginPage,
     icon: 'input',
     showSidebar: true,
     isDisableLoggedIn: true,
   },
   SignUp: {
     exact: true,
+    component: SignUpPage,
   },
   PasswordReset: {
     exact: true,
+    component: PasswordResetPage,
   },
   Manual: {
     exact: true,
+    component: ManualPage,
     icon: 'import_contacts',
     showSidebar: true,
   },
   Technology: {
     exact: true,
+    component: TechnologyPage,
     icon: 'desktop_mac',
     showSidebar: true,
   },
   Forbidden: {
     exact: true,
+    component: ForbiddenPage,
   },
   NotFound: {
     exact: true,
+    component: NotFoundPage,
   },
   Sample: {
     exact: true,
+    component: SamplePage,
     icon: 'accessibility_new',
     showSidebar: true,
   },
-  Home: {
-    exact: true,
-    isPrivate: true,
-    icon: 'home',
-    showSidebar: true,
-  },
+  // Private
   MyRecord: {
     exact: true,
+    component: RecordPage,
     icon: 'create',
     isPrivate: true,
     showSidebar: true,
   },
   MyReport: {
     exact: true,
+    component: ReportPage,
     icon: 'date_range',
     isPrivate: true,
     showSidebar: true,
   },
   MySearch: {
     exact: true,
+    component: SearchPage,
     icon: 'search',
     isPrivate: true,
     showSidebar: true,
   },
   MySetting: {
     exact: true,
+    component: SettingPage,
     icon: 'settings',
     isPrivate: true,
+    showSidebar: true,
+  },
+  Home: {
+    exact: true,
+    component: HomePage,
+    isPrivate: true,
+    icon: 'home',
     showSidebar: true,
   },
 };

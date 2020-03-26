@@ -6,6 +6,8 @@ import { configureStore } from '@/store';
 import history from '@/root/history';
 import Notifier from '@/presentation/backgrounds/Notifier';
 import ErrorBoundary from '@Components/others/ErrorBoundary/ErrorBoundary';
+import AppRouter from '@/presentation/routers/AppRouter';
+import MainTemplate from '@/presentation/templates/MainTemplate/MainTemplate';
 
 const store = configureStore({});
 const App: React.FC = () => {
@@ -13,7 +15,9 @@ const App: React.FC = () => {
     <Provider store={store}>
       <ConnectedRouter history={history}>
         <SnackbarProvider maxSnack={5} preventDuplicate={false}>
-          <p>あああああ</p>
+          <MainTemplate>
+            <AppRouter />
+          </MainTemplate>
           <ErrorBoundary>
             <Notifier />
           </ErrorBoundary>

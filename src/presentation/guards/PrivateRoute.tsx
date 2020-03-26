@@ -8,12 +8,19 @@ type TProps = {
 
 const PrivateRoute: React.FC<TProps> = ({ path, children = null }) => {
   // FIXME: useSelector？
-  const isLoggedIn = false;
+  const isLoggedIn = true;
   return (
     <Route
       path={path}
       render={({ location }) =>
-        isLoggedIn ? children : <Redirect to={{ pathname: EPath.Forbidden, state: { from: location } }} />
+        isLoggedIn ? (
+          <React.Fragment>
+            {children}
+            <Redirect to={path} />
+          </React.Fragment>
+        ) : (
+          <Redirect to={{ pathname: EPath.Forbidden, state: { from: location } }} />
+        )
       }
     />
   );
