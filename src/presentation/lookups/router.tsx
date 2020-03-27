@@ -76,7 +76,7 @@ type TRouter = {
   showSidebar?: boolean;
   isDisableLoggedIn?: boolean;
 };
-type TRouterConfig = { pathProps: PathProps } & TRouter;
+export type TRouterConfig = { pathProps: PathProps } & TRouter;
 
 const ROUTER_CONFIG: Record<keyof typeof EPath, TRouter> = {
   Top: {

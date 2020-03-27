@@ -1,0 +1,18 @@
+.list {
+  min-width: 180px;
+  .listContainer {
+    overflow-y: scroll;
+  }
+  .listItemActive {
+    background-color: rgba(0, 0, 0, 0.5) !important;
+    > div {
+      > span {
+        color: #fff;
+      }
+    }
+  }
+}
+
+// .padding {
+//   padding-bottom: 2px;
+// }
