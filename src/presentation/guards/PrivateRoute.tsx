@@ -1,14 +1,15 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router';
 import { EPath, TPath } from '../lookups/router';
+import { useSelector } from 'react-redux';
+import { authSelector } from '@/application/selector/entity/auth';
 
 type TProps = {
   path: TPath;
 };
 
 const PrivateRoute: React.FC<TProps> = ({ path, children = null }) => {
-  // FIXME: useSelector？
-  const isLoggedIn = true;
+  const isLoggedIn = useSelector(authSelector.isLoggedIn);
   return (
     <Route
       path={path}

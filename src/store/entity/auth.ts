@@ -5,18 +5,24 @@ import { PickedFirebaseUser } from '@/library/firebase/auth';
 type TData = PickedFirebaseUser & {
   isLoggedIn: boolean;
   loggedUserId: string;
+  username: string;
+};
+type TState = TEntityData<TData>;
+
+const initialData: TData = {
+  isLoggedIn: true,
+  loggedUserId: '',
+  uid: '',
+  emailVerified: false,
+  isAnonymous: true,
+  photoURL: '',
+  email: '',
+  username: '',
 };
 
-type TState = TEntityData<TData>;
 const initialState: TState = {
   data: {
-    isLoggedIn: false,
-    loggedUserId: '',
-    uid: '',
-    emailVerified: false,
-    isAnonymous: true,
-    photoURL: '',
-    email: '',
+    ...initialData,
   },
   meta: {
     updatedAt: new Date(),

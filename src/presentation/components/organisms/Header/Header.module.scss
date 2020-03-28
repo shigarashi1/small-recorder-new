@@ -1,0 +1,15 @@
+#container {
+  height: 65px;
+  flex-direction: row !important;
+  justify-content: space-between;
+  .left {
+    padding: 0 12px;
+  }
+  .right {
+    justify-content: flex-end;
+    padding: 0 12px;
+    .username {
+      padding: 3px 3px 0;
+    }
+  }
+}

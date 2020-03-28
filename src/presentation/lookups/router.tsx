@@ -1,5 +1,8 @@
 import React from 'react';
+import pathOr from 'ramda/es/pathOr';
+import sortBy from 'ramda/es/sortBy';
 import { RouteComponentProps } from 'react-router';
+
 import { TI18nObj } from '../types';
 import TopPage from '../pages/TopPage/TopPage';
 import HomePage from '../pages/HomePage/HomePage';
@@ -28,13 +31,13 @@ export const EPath = {
   // sample
   Sample: '/sample/:mode',
   // private
-  Home: '/private',
   MyRecord: '/private/records',
   MyReport: '/private/reports',
   MySearch: '/private/search',
-  MySetting: '/private/setting',
+  MySetting: '/private/options',
+  Home: '/private',
 } as const;
-type PathProps = keyof typeof EPath;
+export type PathProps = keyof typeof EPath;
 export type TPath = typeof EPath[PathProps];
 
 export const BROWSER_TITLE: Record<PathProps, TI18nObj> = {
@@ -47,11 +50,23 @@ export const BROWSER_TITLE: Record<PathProps, TI18nObj> = {
   Forbidden: { jp: 'ログインが必要です', en: 'Forbidden' },
   NotFound: { jp: 'お探しのページがありません', en: 'NotFound' },
   Sample: { jp: 'サンプル', en: 'Sample' },
-  Home: { jp: 'ホーム', en: 'Home' },
   MyRecord: { jp: '記録', en: 'Record' },
   MyReport: { jp: 'レポート', en: 'Report' },
   MySearch: { jp: '検索', en: 'Search' },
-  MySetting: { jp: '設定', en: 'Setting' },
+  MySetting: { jp: '設定', en: 'Option' },
+  Home: { jp: 'ホーム', en: 'Home' },
+};
+
+export const SIDEBAR_TITLE: Partial<Record<PathProps, TI18nObj>> = {
+  Login: { jp: 'ログイン', en: 'Login' },
+  Manual: { jp: '使い方', en: 'Manual' },
+  Technology: { jp: '技術情報', en: 'Technology' },
+  Sample: { jp: 'サンプル', en: 'Sample' },
+  MyRecord: { jp: 'レコード', en: 'Record' },
+  MyReport: { jp: 'レポート', en: 'Report' },
+  MySearch: { jp: '検索', en: 'Search' },
+  MySetting: { jp: '設定', en: 'Option' },
+  Home: { jp: 'ホーム', en: 'Home' },
 };
 
 type TIcon =
@@ -72,9 +87,11 @@ type TRouter = {
   component: React.ComponentType<RouteComponentProps<any>> | React.ComponentType<any>;
   isPrivate?: boolean;
   // sidebar
-  icon?: TIcon;
-  showSidebar?: boolean;
-  isDisableLoggedIn?: boolean;
+  sidebar?: {
+    order: number;
+    icon: TIcon;
+    isDisableLoggedIn?: boolean;
+  };
 };
 export type TRouterConfig = { pathProps: PathProps } & TRouter;
 
@@ -82,13 +99,6 @@ const ROUTER_CONFIG: Record<keyof typeof EPath, TRouter> = {
   Top: {
     exact: true,
     component: TopPage,
-  },
-  Login: {
-    exact: true,
-    component: LoginPage,
-    icon: 'input',
-    showSidebar: true,
-    isDisableLoggedIn: true,
   },
   SignUp: {
     exact: true,
@@ -98,17 +108,14 @@ const ROUTER_CONFIG: Record<keyof typeof EPath, TRouter> = {
     exact: true,
     component: PasswordResetPage,
   },
-  Manual: {
+  Login: {
     exact: true,
-    component: ManualPage,
-    icon: 'import_contacts',
-    showSidebar: true,
-  },
-  Technology: {
-    exact: true,
-    component: TechnologyPage,
-    icon: 'desktop_mac',
-    showSidebar: true,
+    component: LoginPage,
+    sidebar: {
+      order: 1,
+      icon: 'input',
+      isDisableLoggedIn: true,
+    },
   },
   Forbidden: {
     exact: true,
@@ -118,47 +125,75 @@ const ROUTER_CONFIG: Record<keyof typeof EPath, TRouter> = {
     exact: true,
     component: NotFoundPage,
   },
-  Sample: {
-    exact: true,
-    component: SamplePage,
-    icon: 'accessibility_new',
-    showSidebar: true,
-  },
   // Private
-  MyRecord: {
-    exact: true,
-    component: RecordPage,
-    icon: 'create',
-    isPrivate: true,
-    showSidebar: true,
-  },
-  MyReport: {
-    exact: true,
-    component: ReportPage,
-    icon: 'date_range',
-    isPrivate: true,
-    showSidebar: true,
-  },
-  MySearch: {
-    exact: true,
-    component: SearchPage,
-    icon: 'search',
-    isPrivate: true,
-    showSidebar: true,
-  },
-  MySetting: {
-    exact: true,
-    component: SettingPage,
-    icon: 'settings',
-    isPrivate: true,
-    showSidebar: true,
-  },
   Home: {
     exact: true,
     component: HomePage,
     isPrivate: true,
-    icon: 'home',
-    showSidebar: true,
+    sidebar: {
+      order: 2,
+      icon: 'home',
+    },
+  },
+  MyRecord: {
+    exact: true,
+    component: RecordPage,
+    isPrivate: true,
+    sidebar: {
+      order: 3,
+      icon: 'create',
+    },
+  },
+  MyReport: {
+    exact: true,
+    component: ReportPage,
+    isPrivate: true,
+    sidebar: {
+      order: 4,
+      icon: 'date_range',
+    },
+  },
+  MySearch: {
+    exact: true,
+    component: SearchPage,
+    isPrivate: true,
+    sidebar: {
+      order: 5,
+      icon: 'search',
+    },
+  },
+  MySetting: {
+    exact: true,
+    component: SettingPage,
+    isPrivate: true,
+    sidebar: {
+      order: 6,
+      icon: 'settings',
+    },
+  },
+  Manual: {
+    exact: true,
+    component: ManualPage,
+    sidebar: {
+      order: 7,
+      icon: 'import_contacts',
+    },
+  },
+  Technology: {
+    exact: true,
+    component: TechnologyPage,
+    sidebar: {
+      order: 8,
+      icon: 'desktop_mac',
+    },
+  },
+  Sample: {
+    exact: true,
+    component: SamplePage,
+    sidebar: {
+      order: 9,
+      icon: 'accessibility_new',
+    },
   },
 };
 
@@ -168,3 +203,9 @@ export const ROUTER_CONFIG_ARRAY = Object.entries(ROUTER_CONFIG).reduce(
 );
 export const ROOT_ROUTER_CONFIG = ROUTER_CONFIG_ARRAY.filter(({ isPrivate }) => !isPrivate);
 export const PRIVATE_ROUTER_CONFIG = ROUTER_CONFIG_ARRAY.filter(({ isPrivate }) => isPrivate);
+
+//
+export const SIDEBAR_ROUTER_CONFIG = sortBy(
+  pathOr(99, ['sidebar', 'order']),
+  ROUTER_CONFIG_ARRAY.filter(({ sidebar }) => !!sidebar),
+);

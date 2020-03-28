@@ -4,6 +4,7 @@ import styles from './MainTemplate.module.scss';
 
 import { SidebarProvider } from '@Components/organisms/Sidebar/Sidebar.provider';
 
+import Header from '@Components/organisms/Header/Header.container';
 import Sidebar from '@Components/organisms/Sidebar/Sidebar.container';
 import ErrorBoundary from '@Components/others/ErrorBoundary/ErrorBoundary';
 
@@ -11,9 +12,9 @@ const MainTemplate: React.FC<{}> = ({ children = null }) => {
   return (
     <div id={styles.root}>
       <SidebarProvider>
-        {/* <ErrorBoundary>
-        <Header />
-      </ErrorBoundary> */}
+        <ErrorBoundary>
+          <Header />
+        </ErrorBoundary>
         <div className={styles.container}>
           <ErrorBoundary>
             {/* <PageTitle /> */}

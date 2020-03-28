@@ -8,4 +8,4 @@ const I18nText: React.FC<TProps> = ({ i18nObj }) => {
   const langCode = useSelector(languageSelector.langCode);
   return <I18nTextP i18nObj={i18nObj} langCode={langCode} />;
 };
-export { I18nText };
+export default I18nText;

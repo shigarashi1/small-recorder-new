@@ -13,16 +13,18 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Toolbar from '@material-ui/core/Toolbar';
 
-import { TRouterConfig, TPath, EPath } from '@/presentation/lookups/router';
+import { TRouterConfig, TPath, EPath, SIDEBAR_TITLE } from '@/presentation/lookups/router';
+import I18nText from '@Components/atoms/I18nText/I18nText.container';
+import { getSidebarTitle } from '@/presentation/helpers';
 
 type TProps = {
   isLoggedIn: boolean;
-  routerConfig: TRouterConfig[];
+  sidebarConfig: TRouterConfig[];
   hasOpened: boolean;
   close: () => void;
 };
 
-const Sidebar: React.FC<TProps> = ({ hasOpened, isLoggedIn, routerConfig, close }) => {
+const Sidebar: React.FC<TProps> = ({ hasOpened, isLoggedIn, sidebarConfig, close }) => {
   const history = useHistory();
   const { pathname } = history.location;
 
@@ -36,7 +38,8 @@ const Sidebar: React.FC<TProps> = ({ hasOpened, isLoggedIn, routerConfig, close 
     [history, pathname],
   );
 
-  const canShowListItem = (item: TRouterConfig): boolean => !!item.showSidebar && (!item.isPrivate || isLoggedIn);
+  const canShowListItem = (item: TRouterConfig): boolean =>
+    isLoggedIn ? !item?.sidebar?.isDisableLoggedIn : !item.isPrivate;
   const getClassName = (path: TPath): string | undefined => (pathname === path ? styles.listItemActive : undefined);
   const renderListItem = (item: TRouterConfig) =>
     canShowListItem(item) && (
@@ -48,12 +51,12 @@ const Sidebar: React.FC<TProps> = ({ hasOpened, isLoggedIn, routerConfig, close 
         className={getClassName(EPath[item.pathProps])}
         onClick={onGoToPage(EPath[item.pathProps])}
       >
-        {item.icon && (
+        {item.sidebar?.icon && (
           <ListItemIcon>
-            <Icon>{item.icon}</Icon>
+            <Icon>{item.sidebar.icon}</Icon>
           </ListItemIcon>
         )}
-        <ListItemText primary={item.pathProps} />
+        <ListItemText primary={<I18nText i18nObj={getSidebarTitle(SIDEBAR_TITLE, item.pathProps)} />} />
       </ListItem>
     );
 
@@ -67,7 +70,7 @@ const Sidebar: React.FC<TProps> = ({ hasOpened, isLoggedIn, routerConfig, close 
         </Toolbar>
         <div className={styles.listContainer}>
           <List component="div" disablePadding={true}>
-            {routerConfig.map(renderListItem)}
+            {sidebarConfig.map(renderListItem)}
           </List>
         </div>
       </div>

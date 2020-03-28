@@ -10,7 +10,7 @@ export type TLangCode = typeof ELangCode[keyof typeof ELangCode];
 
 // dialog
 type TBaseDialog = {
-  hasOpen: boolean;
+  hasOpened: boolean;
   close: () => void;
   title: string;
   context: string;
@@ -28,6 +28,7 @@ export type TYesNoDialog = TBaseDialog & {
   yes: () => void;
   no: () => void;
 };
+export type OpenInfoDialogFn = (v: Omit<TInfoDialog, 'hasOpened' | 'close'> & { close?: () => void }) => void;
 
 // Snackbar
 export type TNotifierProps = {

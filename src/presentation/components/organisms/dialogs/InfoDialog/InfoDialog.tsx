@@ -7,7 +7,7 @@ import BaseDialog from '../BaseDialog/BaseDialog';
 import Typography from '@material-ui/core/Typography';
 import { TInfoDialog } from '../../../../types';
 
-const InfoDialog: React.FC<TInfoDialog> = ({ hasOpen, title, context, ok, close }) => {
+const InfoDialog: React.FC<TInfoDialog> = ({ hasOpened: hasOpen, title, context, ok, close }) => {
   const onClose = () => {
     close();
   };

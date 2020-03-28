@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import styles from './WithLabel.module.scss';
 
 import { TI18nObj } from '../../../types';
-import { I18nText } from '@Components/atoms/I18nText/I18nText.container';
+import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
 type TProps = {
   label: TI18nObj;

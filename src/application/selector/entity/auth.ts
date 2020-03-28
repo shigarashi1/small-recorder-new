@@ -6,4 +6,5 @@ const featureSelector = (state: AppState): ReturnType<typeof authModule.reducer>
 
 export const authSelector = {
   isLoggedIn: createSelector(featureSelector, (state) => state.data.isLoggedIn),
+  username: createSelector(featureSelector, (state) => state.data.username),
 };
