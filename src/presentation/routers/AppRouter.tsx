@@ -5,12 +5,12 @@ import PrivateRoute from '../guards/PrivateRoute';
 
 const AppRouter: React.FC<{}> = () => (
   <Switch>
-    {ROOT_ROUTER_CONFIG.map(({ exact, pathProps, component }) => (
-      <Route key={`root-router-${pathProps}`} exact={exact} path={EPath[pathProps]} component={component} />
+    {ROOT_ROUTER_CONFIG.map(({ exact, pathKey, component }) => (
+      <Route key={`root-router-${pathKey}`} exact={exact} path={EPath[pathKey]} component={component} />
     ))}
     <PrivateRoute path={EPath.Home}>
-      {PRIVATE_ROUTER_CONFIG.map(({ exact, pathProps, component }) => (
-        <Route key={`private-router-${pathProps}`} exact={exact} path={EPath[pathProps]} component={component} />
+      {PRIVATE_ROUTER_CONFIG.map(({ exact, pathKey, component }) => (
+        <Route key={`private-router-${pathKey}`} exact={exact} path={EPath[pathKey]} component={component} />
       ))}
     </PrivateRoute>
     <Redirect to={EPath.NotFound} />

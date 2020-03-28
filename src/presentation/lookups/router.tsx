@@ -37,10 +37,10 @@ export const EPath = {
   MySetting: '/private/options',
   Home: '/private',
 } as const;
-export type PathProps = keyof typeof EPath;
-export type TPath = typeof EPath[PathProps];
+export type TPathKey = keyof typeof EPath;
+export type TPath = typeof EPath[TPathKey];
 
-export const BROWSER_TITLE: Record<PathProps, TI18nObj> = {
+export const BROWSER_TITLE: Record<TPathKey, TI18nObj> = {
   Top: { jp: 'トップ', en: 'Top' },
   Login: { jp: 'ログイン', en: 'Login' },
   SignUp: { jp: 'ユーザー登録', en: 'SignUp' },
@@ -57,7 +57,7 @@ export const BROWSER_TITLE: Record<PathProps, TI18nObj> = {
   Home: { jp: 'ホーム', en: 'Home' },
 };
 
-export const SIDEBAR_TITLE: Partial<Record<PathProps, TI18nObj>> = {
+export const SIDEBAR_TITLE: Partial<Record<TPathKey, TI18nObj>> = {
   Login: { jp: 'ログイン', en: 'Login' },
   Manual: { jp: '使い方', en: 'Manual' },
   Technology: { jp: '技術情報', en: 'Technology' },
@@ -93,7 +93,7 @@ type TRouter = {
     isDisableLoggedIn?: boolean;
   };
 };
-export type TRouterConfig = { pathProps: PathProps } & TRouter;
+export type TRouterConfig = { pathKey: TPathKey } & TRouter;
 
 const ROUTER_CONFIG: Record<keyof typeof EPath, TRouter> = {
   Top: {
@@ -198,7 +198,7 @@ const ROUTER_CONFIG: Record<keyof typeof EPath, TRouter> = {
 };
 
 export const ROUTER_CONFIG_ARRAY = Object.entries(ROUTER_CONFIG).reduce(
-  (pre, [path, config]) => [...pre, { pathProps: path as PathProps, ...config }],
+  (pre, [path, config]) => [...pre, { pathKey: path as TPathKey, ...config }],
   [] as TRouterConfig[],
 );
 export const ROOT_ROUTER_CONFIG = ROUTER_CONFIG_ARRAY.filter(({ isPrivate }) => !isPrivate);

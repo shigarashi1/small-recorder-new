@@ -15,7 +15,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 import { TRouterConfig, TPath, EPath, SIDEBAR_TITLE } from '@/presentation/lookups/router';
 import I18nText from '@Components/atoms/I18nText/I18nText.container';
-import { getSidebarTitle } from '@/presentation/helpers';
+import { getSidebarTitle, isMatchPath } from '@/presentation/helpers';
 
 type TProps = {
   isLoggedIn: boolean;
@@ -40,23 +40,21 @@ const Sidebar: React.FC<TProps> = ({ hasOpened, isLoggedIn, sidebarConfig, close
 
   const canShowListItem = (item: TRouterConfig): boolean =>
     isLoggedIn ? !item?.sidebar?.isDisableLoggedIn : !item.isPrivate;
-  const getClassName = (path: TPath): string | undefined => (pathname === path ? styles.listItemActive : undefined);
   const renderListItem = (item: TRouterConfig) =>
     canShowListItem(item) && (
       <ListItem
-        key={`sidebar-link-${item.pathProps}`}
+        key={`sidebar-link-${item.pathKey}`}
         button={true}
         divider={true}
-        selected={pathname !== EPath[item.pathProps]}
-        className={getClassName(EPath[item.pathProps])}
-        onClick={onGoToPage(EPath[item.pathProps])}
+        selected={isMatchPath(pathname, EPath[item.pathKey])}
+        onClick={onGoToPage(EPath[item.pathKey])}
       >
         {item.sidebar?.icon && (
           <ListItemIcon>
             <Icon>{item.sidebar.icon}</Icon>
           </ListItemIcon>
         )}
-        <ListItemText primary={<I18nText i18nObj={getSidebarTitle(SIDEBAR_TITLE, item.pathProps)} />} />
+        <ListItemText primary={<I18nText i18nObj={getSidebarTitle(SIDEBAR_TITLE, item.pathKey)} />} />
       </ListItem>
     );
 
