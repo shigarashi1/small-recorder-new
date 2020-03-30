@@ -35,7 +35,7 @@ const _actions = {
   previous: ac<TActionProps>('previous'),
   execute: ac<Omit<TActionProps, 'onPrevious'>>('execute'),
 };
-export const asyncFuncWithCallback = _actions.previous;
+export const asyncFnWithCallback = _actions.previous;
 
 const previous: Epic<AnyAction, Action<any>, AppState> = (action$, store) =>
   action$.pipe(
