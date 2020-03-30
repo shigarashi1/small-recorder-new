@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { objectMapper } from './object-mapper';
-// import { EDateFormat, toDate } from '.';
+import { EDateFormat, toDate } from '.';
 
 const PARAM = {
   str1: 'sssss',
@@ -54,7 +54,7 @@ type TResultObj = typeof RESULT;
 describe('createObjectMapper', () => {
   const mapToResultObj = objectMapper<TParamObj, TResultObj>({
     string1: { key: 'str1' },
-    dateStr: { key: 'date', converter: (v: any) => 'aaa' },
+    dateStr: { key: 'date', converter: (v: any) => toDate(v, EDateFormat.Day) },
     nestedPrice: {
       max: {
         key: 'pmax',

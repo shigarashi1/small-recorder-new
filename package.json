@@ -27,7 +27,18 @@
   "jest": {
     "transformIgnorePatterns": [
       "/node_modules/(?!(ramda|date-fns)/)"
-    ]
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx"
+    ],
+    "moduleNameMapper": {
+      "@/(.*)$": "<rootDir>/src/$1"
+    }
   },
   "engines": {
     "node": "12.16.1"
