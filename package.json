@@ -27,9 +27,6 @@
   "jest": {
     "transformIgnorePatterns": [
       "/node_modules/(?!(ramda|date-fns)/)"
-    ],
-    "moduleFileExtensions": [
-      "ts"
     ]
   },
   "engines": {
