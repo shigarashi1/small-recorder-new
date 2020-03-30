@@ -1,5 +1,7 @@
+@import '../../../../styles/_variables';
+
 #container {
-  height: 65px;
+  height: $height-header;
   flex-direction: row !important;
   justify-content: space-between;
   .left {
