@@ -1,12 +1,6 @@
 import firebase from './import';
 
-import prop from 'ramda/es/prop';
-import omit from 'ramda/es/omit';
-import partial from 'ramda/es/partial';
-import drop from 'ramda/es/drop';
-import head from 'ramda/es/head';
-import pipe from 'ramda/es/pipe';
-import map from 'ramda/es/map';
+import { prop, omit, partial, drop, head, pipe, map } from '@/library/ramda';
 
 import { TBaseDomainModel } from '@DomainModels/base';
 import { ApiError } from '@/library/models/error';

@@ -1,7 +1,7 @@
 import { useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router';
 import { useSelector } from 'react-redux';
-import partial from 'ramda/es/partial';
+import { partial } from '@/library/ramda';
 
 import { ROUTER_CONFIG_ARRAY, BROWSER_TITLE } from '../lookups/router';
 import { languageSelector } from '@/application/selector/ui';

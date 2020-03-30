@@ -1,8 +1,7 @@
 import React, { ComponentProps, useCallback } from 'react';
 import DateFnsUtils from '@date-io/date-fns';
 import isValid from 'date-fns/isValid';
-import pipe from 'ramda/es/pipe';
-import partial from 'ramda/es/partial';
+import { pipe, partial } from '@/library/ramda';
 
 import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers';
 

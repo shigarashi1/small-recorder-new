@@ -9,9 +9,7 @@ import {
   TCreateDocConfig,
 } from '@/library/firebase/store';
 import { Record } from '@DomainModels/record';
-import partial from 'ramda/es/partial';
-import pipe from 'ramda/es/pipe';
-import partialRight from 'ramda/es/partialRight';
+import { partial, pipe, partialRight } from '@/library/ramda';
 
 const toRecord = (v: QueryDocSnapshot | DocData): Record => ({
   id: v.id,

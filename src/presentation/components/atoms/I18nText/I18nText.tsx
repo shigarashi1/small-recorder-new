@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import partial from 'ramda/es/partial';
+import { partial } from '@/library/ramda';
 
 import { TI18nObj, TLangCode } from '@/presentation/types';
 import { getText } from '@/presentation/i18n';

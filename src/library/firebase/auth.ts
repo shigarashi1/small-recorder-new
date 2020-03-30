@@ -1,7 +1,6 @@
 import firebase from './import';
 
-import pick from 'ramda/es/pick';
-import pipe from 'ramda/es/pipe';
+import { pick, pipe } from '@/library/ramda';
 
 import { auth } from '.';
 import { ApiError } from '../models/error';

@@ -1,6 +1,4 @@
-import pipe from 'ramda/es/pipe';
-import partial from 'ramda/es/partial';
-import partialRight from 'ramda/es/partialRight';
+import { pipe, partial, partialRight } from '@/library/ramda';
 
 import { Category } from '@DomainModels/category';
 import {

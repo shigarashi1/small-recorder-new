@@ -1,6 +1,5 @@
 import React from 'react';
-import pathOr from 'ramda/es/pathOr';
-import sortBy from 'ramda/es/sortBy';
+import { pathOr, sortBy } from '@/library/ramda';
 import { RouteComponentProps } from 'react-router';
 
 import { TI18nObj } from '../types';
