@@ -62,7 +62,7 @@ export const SIDEBAR_TITLE: Partial<Record<TPathKey, TI18nObj>> = {
   Manual: { jp: '使い方', en: 'Manual' },
   Technology: { jp: '技術情報', en: 'Technology' },
   Sample: { jp: 'サンプル', en: 'Sample' },
-  MyRecord: { jp: 'レコード', en: 'Record' },
+  MyRecord: { jp: '記録', en: 'Record' },
   MyReport: { jp: 'レポート', en: 'Report' },
   MySearch: { jp: '検索', en: 'Search' },
   MySetting: { jp: '設定', en: 'Option' },
