@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NestedRecord } from '../types';
-import { path } from '../ramda';
+import { path, prop } from '../ramda';
 
 type KeyParamerters<P> = keyof P | string[];
 type KeyAndConverter<P> = {
@@ -47,11 +47,9 @@ const isKey4AndConverter = <P>(v: any): v is Key4AndConverter<P> =>
 const isKey5AndConverter = <P>(v: any): v is Key5AndConverter<P> =>
   typeof v === 'object' && typeof v['keys'] !== 'undefined' && Array.isArray(v['keys']) && v['keys'].length === 5;
 const isKeysArray = <P>(v: KeyParamerters<P>): v is string[] => Array.isArray(v);
+const getValue = <P>(obj: P, v: KeyParamerters<P>): any => (isKeysArray<P>(v) ? path([...v], obj) : prop(v, obj));
 const getValues = <P>(obj: P, v: KeyParamerters<P>[]): any[] =>
-  v.reduce((pre, cur) => {
-    const value = isKeysArray<P>(cur) ? path([...cur], obj) : obj[cur];
-    return [...pre, value];
-  }, [] as any[]);
+  v.reduce((pre, cur) => [...pre, getValue(obj, cur)], [] as any[]);
 
 const _objectMapper = <P, R>(config: NestedRecord<R, TConfig<P>>) => (previousObj: P): R =>
   // eslint-disable-next-line complexity
@@ -67,13 +65,12 @@ const _objectMapper = <P, R>(config: NestedRecord<R, TConfig<P>>) => (previousOb
     }
     if (isKeyAndConverter<P>(conf)) {
       const { key, converter } = conf;
-      const v1 = isKeysArray<P>(key) ? path([...key], previousObj) : previousObj[key];
+      const v1 = getValue(previousObj, key);
       return { ...pre, [returnKey]: converter ? converter(v1) : v1 };
     }
     if (isKey2AndConverter<P>(conf)) {
       const { keys, converter } = conf;
       const values = getValues(previousObj, keys);
-
       return { ...pre, [returnKey]: converter(values[0], values[1]) };
     }
     if (isKey3AndConverter<P>(conf)) {
