@@ -1,7 +1,7 @@
 import React, { useCallback, ComponentProps } from 'react';
 import Comp from './LanguageSelect';
 import { useSelector, useDispatch } from 'react-redux';
-import { languageSelector } from '@/application/selector/ui';
+import { languageSelector } from '@Selector/ui';
 import { TLangCode } from '@/presentation/types';
 import { languageModule } from '@/store/ui/language';
 

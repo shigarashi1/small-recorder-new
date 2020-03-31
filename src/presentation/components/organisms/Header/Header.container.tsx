@@ -1,6 +1,6 @@
 import React, { useContext, ComponentProps, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { authSelector } from '@/application/selector/entity/auth';
+import { authSelector } from '@Selector/entity/auth';
 import { SidebarContext } from '../Sidebar/Sidebar.provider';
 import { OpenInfoDialogFn } from '@/presentation/types';
 import { Logger } from '@/library/models/logger';

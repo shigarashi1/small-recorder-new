@@ -1,7 +1,7 @@
 import React, { ComponentProps } from 'react';
 import I18nTextP from './I18nText';
 import { useSelector } from 'react-redux';
-import { languageSelector } from '@/application/selector/ui';
+import { languageSelector } from '@Selector/ui';
 
 type TProps = Omit<ComponentProps<typeof I18nTextP>, 'langCode' | 'children'>;
 const I18nText: React.FC<TProps> = ({ i18nObj }) => {

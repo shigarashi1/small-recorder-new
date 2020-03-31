@@ -4,7 +4,7 @@ import { useSnackbar, CloseReason, OptionsObject } from 'notistack';
 import { useSelector, useDispatch } from 'react-redux';
 
 import Button from '@material-ui/core/Button';
-import { notifierSelector } from '@/application/selector/ui';
+import { notifierSelector } from '@Selector/ui';
 import { notifierModule } from '@/store/ui/notifier';
 
 const addDefaultOptions = (dismiss: (v: string) => void, id: string, options?: OptionsObject): OptionsObject => ({

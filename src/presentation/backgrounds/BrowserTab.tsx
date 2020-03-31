@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { partial } from '@/library/ramda';
 
 import { ROUTER_CONFIG_ARRAY, BROWSER_TITLE } from '../lookups/router';
-import { languageSelector } from '@/application/selector/ui';
+import { languageSelector } from '@Selector/ui';
 import { getBrowserTitle } from '../helpers';
 
 const DEFAULT_TITLE = 'Small Recorder';
