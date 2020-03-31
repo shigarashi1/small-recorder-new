@@ -3,6 +3,7 @@ import pipe from 'ramda/src/pipe';
 import pick from 'ramda/src/pick';
 import omit from 'ramda/src/omit';
 import prop from 'ramda/src/prop';
+import path from 'ramda/src/path';
 
 import partial from 'ramda/src/partial';
 import partialRight from 'ramda/src/partialRight';
@@ -19,6 +20,7 @@ import sortBy from 'ramda/src/sortBy';
 export {
   pipe,
   pick,
+  path,
   omit,
   partial,
   partialRight,

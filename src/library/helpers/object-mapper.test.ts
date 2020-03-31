@@ -12,9 +12,9 @@ const PARAM = {
   dateYear: '2019',
   dateMonth: '02',
   dateDay: '05',
-  nested: {
-    nested: {
-      nested: {
+  nested1: {
+    nested2: {
+      nested3: {
         key1: 'nested',
         key2: 99,
         key3: false,
@@ -40,9 +40,9 @@ const RESULT = {
   },
   combine2KeyTime: '11:22',
   combine3KeyDate: new Date('2019-02-05'),
-  nested: {
-    nested: {
-      nested: {
+  nested1: {
+    nested2: {
+      nested3: {
         combine: 'false99nested2019-01-01',
       },
     },
@@ -71,17 +71,23 @@ describe('createObjectMapper', () => {
       keys: ['dateYear', 'dateMonth', 'dateDay'],
       converter: (v1: any, v2: any, v3: any) => `${v1}-${v2}`,
     },
-    nested: {
-      nested: {
-        nested: {
+    nested1: {
+      nested2: {
+        nested3: {
           combine: {
-            key: 'nested',
+            keys: [
+              ['nested1', 'nested2', 'nested3', 'key1'],
+              ['nested1', 'nested2', 'nested3', 'key2'],
+              ['nested1', 'nested2', 'nested3', 'key3'],
+              ['nested1', 'nested2', 'nested3', 'key4'],
+            ],
+            converter: (v1: any, v2: any, v3: any, v4: any) => `${v3}${v2}${v1}${toDate(v4, EDateFormat.Day)}`,
           },
         },
       },
     },
     nestedKey2: {
-      key: 'nested',
+      key: 'nested1',
     },
   })(PARAM);
   it('keyで1対1でmappingして返却', () => {
@@ -103,6 +109,6 @@ describe('createObjectMapper', () => {
     expect(mapToResultObj.nestedKey2).toEqual(RESULT.nestedKey2);
   });
   it('4のkeyを1つにして、変換して返却', () => {
-    expect(mapToResultObj.nested.nested.nested.combine).toEqual(RESULT.nested.nested.nested.combine);
+    expect(mapToResultObj.nested1.nested2.nested3.combine).toEqual(RESULT.nested1.nested2.nested3.combine);
   });
 });
