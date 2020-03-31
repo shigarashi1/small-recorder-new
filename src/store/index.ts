@@ -25,11 +25,13 @@ import { uiReducers } from './ui';
 import { sampleEpics } from '@/__sample';
 import { libraryEpics } from '@/library/redux-observable';
 import { applicationReducers } from './application';
+import { authModule } from './auth';
 
 // MEMO: anyを許容する
 /* eslint-disable @typescript-eslint/no-explicit-any */
 // reducer
 export const reducers = combineReducers({
+  auth: authModule.reducer,
   router: connectRouter(history),
   application: applicationReducers,
   entity: entityReducers,
