@@ -17,6 +17,7 @@
   "path-autocomplete.pathMappings": {
     "@Components": "${folder}/src/presentation/components",
     "@Events": "${folder}/src/presentation/events",
+    "@Selector": "${folder}/src/application/selector",
     "@DomainModels": "${folder}/src/domain/models",
     "@": "${folder}/src"
   },

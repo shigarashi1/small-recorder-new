@@ -4,6 +4,7 @@
     "paths": {
       "@Components/*": ["./presentation/components/*"],
       "@Events/*": ["./presentation/events/*"],
+      "@Selector/*": ["./application/selector/*"],
       "@DomainModels/*": ["./domain/models/*"],
       "@/*": ["./*"]
     }

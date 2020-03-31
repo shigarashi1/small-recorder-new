@@ -7,6 +7,7 @@ module.exports = function override(config) {
     alias: {
       "@Components": path.resolve(__dirname, "src/presentation/components"),
       "@Events": path.resolve(__dirname, "src/presentation/events"),
+      "@Selector": path.resolve(__dirname, "src/application/selector"),
       "@DomainModels": path.resolve(__dirname, "src/domain/models"),
       "@": path.resolve(__dirname, "src")
     }

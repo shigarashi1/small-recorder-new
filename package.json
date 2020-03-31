@@ -37,7 +37,11 @@
       "tsx"
     ],
     "moduleNameMapper": {
-      "@/(.*)$": "<rootDir>/src/$1"
+      "@/(.*)$": "<rootDir>/src/$1",
+      "@Components/(.*)$": "<rootDir>/src/presentation/components/$1",
+      "@Events/(.*)$": "<rootDir>/src/presentation/events/$1",
+      "@Selector/(.*)$": "<rootDir>/src/application/selector/$1",
+      "@DomainModels/(.*)$": "<rootDir>/src/domain/models/$1"
     }
   },
   "engines": {
