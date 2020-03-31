@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NestedRecord } from '../types';
 import { path, prop } from '../ramda';
+import { Logger } from '../models/logger';
 
 type KeyParamerters<P> = keyof P | string[];
 type KeyAndConverter<P> = {
@@ -88,6 +89,7 @@ const _objectMapper = <P, R>(config: NestedRecord<R, TConfig<P>>) => (previousOb
       const values = getValues(previousObj, keys);
       return { ...pre, [returnKey]: converter(values[0], values[1], values[2], values[3], values[4]) };
     }
+    Logger.warn('objectMapper unknown config', k, conf);
     return { ...pre };
   }, {} as R);
 
