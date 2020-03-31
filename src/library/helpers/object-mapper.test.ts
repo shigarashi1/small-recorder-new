@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { objectMapper } from './object-mapper';
-import { EDateFormat, toDate } from '.';
+import { EDateFormat, toDate, toDateStr } from '.';
 
 const PARAM = {
   str1: 'sssss',
@@ -35,11 +35,11 @@ const RESULT = {
   string1: 'sssss',
   dateStr: '2019-01-01',
   nestedPrice: {
-    min: 100,
-    max: 1,
+    min: 1,
+    max: 100,
   },
   combine2KeyTime: '11:22',
-  combine3KeyDate: new Date('2019-02-05'),
+  combine3KeyDate: toDate('2019-02-05'),
   nested1: {
     nested2: {
       nested3: {
@@ -54,7 +54,7 @@ type TResultObj = typeof RESULT;
 describe('createObjectMapper', () => {
   const mapToResultObj = objectMapper<TParamObj, TResultObj>({
     string1: { key: 'str1' },
-    dateStr: { key: 'date', converter: (v: any) => toDate(v, EDateFormat.Day) },
+    dateStr: { key: 'date', converter: (v: Date) => toDateStr(v) },
     nestedPrice: {
       max: {
         key: 'pmax',
@@ -69,7 +69,7 @@ describe('createObjectMapper', () => {
     },
     combine3KeyDate: {
       keys: ['dateYear', 'dateMonth', 'dateDay'],
-      converter: (v1: any, v2: any, v3: any) => `${v1}-${v2}`,
+      converter: (v1: any, v2: any, v3: any) => toDate(`${v1}-${v2}-${v3}`),
     },
     nested1: {
       nested2: {
@@ -81,13 +81,14 @@ describe('createObjectMapper', () => {
               ['nested1', 'nested2', 'nested3', 'key3'],
               ['nested1', 'nested2', 'nested3', 'key4'],
             ],
-            converter: (v1: any, v2: any, v3: any, v4: any) => `${v3}${v2}${v1}${toDate(v4, EDateFormat.Day)}`,
+            converter: (v1: any, v2: any, v3: any, v4: any) => `${v3}${v2}${v1}${toDateStr(v4, EDateFormat.Day)}`,
           },
         },
       },
     },
     nestedKey2: {
-      key: 'nested1',
+      key: ['nested1', 'nested2', 'nested3', 'key2'],
+      converter: (v: number) => String(v),
     },
   })(PARAM);
   it('keyで1対1でmappingして返却', () => {
@@ -103,7 +104,7 @@ describe('createObjectMapper', () => {
     expect(mapToResultObj.combine2KeyTime).toEqual(RESULT.combine2KeyTime);
   });
   it('3のkeyを1つにして、変換して返却', () => {
-    expect(mapToResultObj.combine2KeyTime).toEqual(RESULT.combine3KeyDate);
+    expect(mapToResultObj.combine3KeyDate).toEqual(RESULT.combine3KeyDate);
   });
   it('nestされた値を変換して返却', () => {
     expect(mapToResultObj.nestedKey2).toEqual(RESULT.nestedKey2);
