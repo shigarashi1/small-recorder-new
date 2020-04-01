@@ -13,7 +13,7 @@ class MockConsole {
     //
   }
   static error(...v: any[]): void {
-    console.error(v);
+    console.error(...v);
   }
   static debug(...v: any[]): void {
     //
