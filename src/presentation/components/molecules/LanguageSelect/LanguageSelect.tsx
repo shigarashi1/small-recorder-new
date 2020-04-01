@@ -7,7 +7,7 @@ import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
 import styles from './LanguageSelect.module.scss';
 import { TLangCode, ELangCode } from '../../../types';
-import { languageSelect } from '../../../i18n/resource';
+import { languageSelect } from './LanguageSelect.i18n';
 
 type TProps = {
   langCode: TLangCode;

@@ -6,7 +6,7 @@ import styles from './OkCancelDialog.module.scss';
 import BaseDialog from '../BaseDialog/BaseDialog';
 import { TOkCancelDialog } from '../../../../types';
 
-const OkCancelDialog: React.FC<TOkCancelDialog> = ({ hasOpened: hasOpen, close, title, context, ok, cancel }) => {
+const OkCancelDialog: React.FC<TOkCancelDialog> = ({ hasOpened, close, title, context, ok, cancel }) => {
   const onOk = () => {
     ok();
     close();
@@ -35,7 +35,7 @@ const OkCancelDialog: React.FC<TOkCancelDialog> = ({ hasOpened: hasOpen, close, 
   return (
     <div id={styles.container}>
       <BaseDialog
-        hasOpen={hasOpen}
+        hasOpened={hasOpened}
         onClose={onClose}
         buttonChildren={buttonChildren}
         title={title}

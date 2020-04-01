@@ -15,10 +15,7 @@ const PrivateRoute: React.FC<TProps> = ({ path, children = null }) => {
       path={path}
       render={({ location }) =>
         isLoggedIn ? (
-          <React.Fragment>
-            {children}
-            <Redirect to={path} />
-          </React.Fragment>
+          <React.Fragment>{children}</React.Fragment>
         ) : (
           <Redirect to={{ pathname: EPath.Forbidden, state: { from: location } }} />
         )

@@ -7,7 +7,7 @@ import BaseDialog from '../BaseDialog/BaseDialog';
 import Typography from '@material-ui/core/Typography';
 import { TInfoDialog } from '../../../../types';
 
-const InfoDialog: React.FC<TInfoDialog> = ({ hasOpened: hasOpen, title, context, ok, close }) => {
+const InfoDialog: React.FC<TInfoDialog> = ({ hasOpened, title, context, ok, close }) => {
   const onClose = () => {
     close();
   };
@@ -20,9 +20,7 @@ const InfoDialog: React.FC<TInfoDialog> = ({ hasOpened: hasOpen, title, context,
   };
 
   const buttonChildren = (
-    <div
-    // className={styles.btnWrapper}
-    >
+    <div>
       <Button onClick={onOk} variant="contained">
         OK
       </Button>
@@ -31,7 +29,7 @@ const InfoDialog: React.FC<TInfoDialog> = ({ hasOpened: hasOpen, title, context,
 
   return (
     <div id={styles.container}>
-      <BaseDialog hasOpen={hasOpen} onClose={onClose} buttonChildren={buttonChildren} title={title}>
+      <BaseDialog hasOpened={hasOpened} onClose={onClose} buttonChildren={buttonChildren} title={title}>
         <React.Fragment>
           <Typography variant="h6" gutterBottom={true}>
             {context}

@@ -6,7 +6,7 @@ import styles from './YesNoDialog.module.scss';
 import BaseDialog from '../BaseDialog/BaseDialog';
 import { TYesNoDialog } from '../../../../types';
 
-const YesNoDialog: React.FC<TYesNoDialog> = ({ hasOpened: hasOpen, title, context, close, yes, no }) => {
+const YesNoDialog: React.FC<TYesNoDialog> = ({ hasOpened, title, context, close, yes, no }) => {
   const onClose = () => {
     close();
   };
@@ -35,7 +35,7 @@ const YesNoDialog: React.FC<TYesNoDialog> = ({ hasOpened: hasOpen, title, contex
   return (
     <div id={styles.container}>
       <BaseDialog
-        hasOpen={hasOpen}
+        hasOpened={hasOpened}
         onClose={onClose}
         buttonChildren={buttonChildren}
         title={title}

@@ -12,8 +12,8 @@ export type TLangCode = typeof ELangCode[keyof typeof ELangCode];
 type TBaseDialog = {
   hasOpened: boolean;
   close: () => void;
-  title: string;
-  context: string;
+  title: string | TI18nObj;
+  context: string | TI18nObj;
 };
 
 export type TInfoDialog = TBaseDialog & {

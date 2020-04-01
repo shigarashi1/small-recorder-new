@@ -9,12 +9,12 @@ import { TError } from '@/library/types';
 type TProps = {
   hasOpen: boolean;
   error: TError;
-  clearError: () => void;
+  clear: () => void;
 };
 
-const ErrorDialog: React.FC<TProps> = ({ hasOpen, error, clearError }) => {
+const ErrorDialog: React.FC<TProps> = ({ hasOpen, error, clear }) => {
   const onClose = () => {
-    clearError();
+    clear();
   };
 
   const buttonChildren = (
@@ -26,7 +26,7 @@ const ErrorDialog: React.FC<TProps> = ({ hasOpen, error, clearError }) => {
   return (
     <div id={styles.container}>
       <BaseDialog
-        hasOpen={hasOpen}
+        hasOpened={hasOpen}
         onClose={onClose}
         title={`[${error.code}] システムエラーが発生しました.`}
         areaLabeledby="dialog-error"
