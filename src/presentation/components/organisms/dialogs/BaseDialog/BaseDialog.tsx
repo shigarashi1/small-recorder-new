@@ -6,6 +6,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 
 import styles from './BaseDialog.module.scss';
 import { TI18nObj } from '@/presentation/types';
+import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
 type TProps = {
   hasOpened: boolean;
@@ -15,6 +16,7 @@ type TProps = {
   buttonChildren?: React.ReactNode;
 };
 
+// eslint-disable-next-line complexity
 const BaseDialog: React.FC<TProps> = ({
   hasOpened: hasOpen,
   onClose,
@@ -31,9 +33,11 @@ const BaseDialog: React.FC<TProps> = ({
       aria-labelledby={areaLabeledby}
       aria-describedby="dialog"
     >
-      {title ? <DialogTitle id="dialog-title">{title}</DialogTitle> : null}
+      {title && (
+        <DialogTitle id="dialog-title">{typeof title === 'string' ? title : <I18nText i18nObj={title} />}</DialogTitle>
+      )}
       <DialogContent className={styles.content}>{children ? children : null}</DialogContent>
-      <DialogActions className={styles.actions}>{buttonChildren ? buttonChildren : null}</DialogActions>
+      {buttonChildren && <DialogActions className={styles.actions}>{buttonChildren}</DialogActions>}
     </Dialog>
   );
 };
