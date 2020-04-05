@@ -16,4 +16,9 @@ export const HeaderText = {
   shortTitle: {
     [ELangCode.Jp]: 'SM Recorder',
   },
+  logoutComfirmDialog: {
+    contexts: {
+      [ELangCode.Jp]: 'ログアウトします。よろしいですか？',
+    },
+  },
 };

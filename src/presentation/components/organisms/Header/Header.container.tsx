@@ -1,29 +1,33 @@
 import React, { useContext, ComponentProps, useCallback } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { authSelector } from '@Selector/entity/auth';
 import { SidebarContext } from '../Sidebar/Sidebar.provider';
-import { OpenInfoDialogFn } from '@/presentation/types';
-import { Logger } from '@/library/models/logger';
+import { ShowInfoDialogParam } from '@/presentation/types';
 
-import Comp from './Header';
+import InjectedComponent from './Header';
+import { infoDialogActions } from '@Events/ui/info-dialog';
 
-type TProps = Pick<ComponentProps<typeof Comp>, 'isStatic'>;
+type TProps = Pick<ComponentProps<typeof InjectedComponent>, 'isStatic'>;
 const Header: React.FC<TProps> = ({ isStatic }) => {
   const isLoggedIn = useSelector(authSelector.isLoggedIn);
   const username = useSelector(authSelector.username);
   const { hasOpened, close, open } = useContext(SidebarContext);
-  const openInfoDialog = useCallback((v: Parameters<OpenInfoDialogFn>[0]) => {
-    Logger.log(v);
-  }, []);
+  const dispatch = useDispatch();
+  const showInfoDialog = useCallback(
+    (v: ShowInfoDialogParam) => {
+      dispatch(infoDialogActions.show(v));
+    },
+    [dispatch],
+  );
   return (
-    <Comp
+    <InjectedComponent
       isStatic={isStatic}
       isLoggedIn={isLoggedIn}
       username={username}
       hasOpened={hasOpened}
       openSidebar={open}
       closeSidebar={close}
-      openInfoDialog={openInfoDialog}
+      showInfoDialog={showInfoDialog}
     />
   );
 };

@@ -6,16 +6,24 @@ import styles from './InfoDialog.module.scss';
 import BaseDialog from '../BaseDialog/BaseDialog';
 import Typography from '@material-ui/core/Typography';
 import { TInfoDialog } from '../../../../types';
+import { infoDialogDefaultText } from './InfoDialog.i18n';
+import { voidFunction, toArray } from '@/library/helpers';
+import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
-const InfoDialog: React.FC<TInfoDialog> = ({ hasOpened, title, context, ok, close }) => {
+type TProps = TInfoDialog;
+const InfoDialog: React.FC<TProps> = ({
+  hasOpened,
+  title = infoDialogDefaultText.title,
+  contexts = infoDialogDefaultText.contexts,
+  ok = voidFunction,
+  close = voidFunction,
+}) => {
   const onClose = () => {
     close();
   };
 
   const onOk = () => {
-    if (ok) {
-      ok();
-    }
+    ok();
     onClose();
   };
 
@@ -32,7 +40,9 @@ const InfoDialog: React.FC<TInfoDialog> = ({ hasOpened, title, context, ok, clos
       <BaseDialog hasOpened={hasOpened} onClose={onClose} buttonChildren={buttonChildren} title={title}>
         <React.Fragment>
           <Typography variant="h6" gutterBottom={true}>
-            {context}
+            {toArray(contexts).map((context, index) => (
+              <I18nText key={`info-dialog-contexts-${index}`} i18nObj={context} />
+            ))}
           </Typography>
         </React.Fragment>
       </BaseDialog>

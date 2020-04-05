@@ -7,6 +7,8 @@ import { errorActions } from '@/root/error-actions';
 import { errorDialogModule } from '@/store/ui/error-dialog';
 import { WrapAction } from '@/library/redux-observable';
 import { Logger } from '@/library/models/logger';
+import { infoDialogModule } from '@/store/ui/info-dialog';
+import { infoDialogActions } from '@Events/ui/info-dialog';
 
 // error dialog Epics
 const throwError: Epic<AnyAction, WrapAction<typeof errorDialogModule.actions.show>, AppState> = (action$, store) =>
@@ -27,5 +29,22 @@ const clearError: Epic<AnyAction, WrapAction<typeof errorDialogModule.actions.di
 
 const errorDialogEpics = combineEpics(throwError, clearError);
 
+const showInfoDialog: Epic<AnyAction, WrapAction<typeof infoDialogModule.actions.show>, AppState> = (action$, store) =>
+  action$.pipe(
+    ofAction(infoDialogActions.show),
+    map(({ payload }) => infoDialogModule.actions.show({ ...payload })),
+  );
+
+const dismissInfoDialog: Epic<AnyAction, WrapAction<typeof infoDialogModule.actions.dismiss>, AppState> = (
+  action$,
+  store,
+) =>
+  action$.pipe(
+    ofAction(infoDialogActions.dismiss),
+    map(({ payload }) => infoDialogModule.actions.dismiss()),
+  );
+
+const infoDialogEpics = combineEpics(showInfoDialog, dismissInfoDialog);
+
 // combine
-export const dialogsEpics = combineEpics(errorDialogEpics);
+export const dialogsEpics = combineEpics(errorDialogEpics, infoDialogEpics);

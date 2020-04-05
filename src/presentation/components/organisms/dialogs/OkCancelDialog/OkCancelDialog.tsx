@@ -5,8 +5,19 @@ import styles from './OkCancelDialog.module.scss';
 
 import BaseDialog from '../BaseDialog/BaseDialog';
 import { TOkCancelDialog } from '../../../../types';
+import { voidFunction, toArray } from '@/library/helpers';
+import { okCancelDialogDefaultText } from './OkCancelDialog.i18n';
+import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
-const OkCancelDialog: React.FC<TOkCancelDialog> = ({ hasOpened, close, title, context, ok, cancel }) => {
+type TProps = TOkCancelDialog;
+const OkCancelDialog: React.FC<TOkCancelDialog> = ({
+  hasOpened,
+  close = voidFunction,
+  title = okCancelDialogDefaultText.title,
+  contexts = okCancelDialogDefaultText.contexts,
+  ok = voidFunction,
+  cancel = voidFunction,
+}) => {
   const onOk = () => {
     ok();
     close();
@@ -41,7 +52,9 @@ const OkCancelDialog: React.FC<TOkCancelDialog> = ({ hasOpened, close, title, co
         title={title}
         areaLabeledby="dialog-ok-cancel"
       >
-        <p>{context}</p>
+        {toArray(contexts).map((context, index) => (
+          <I18nText key={`ok-cancel-dialog-contexts-${index}`} i18nObj={context} />
+        ))}
       </BaseDialog>
     </div>
   );

@@ -14,7 +14,7 @@ import styles from './Header.module.scss';
 import LanguageSelect from '@Components/molecules/LanguageSelect/LanguageSelect.container';
 import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
-import { OpenInfoDialogFn } from '@/presentation/types';
+import { ShowInfoDialogFn } from '@/presentation/types';
 import { EPath, TPath } from '@/presentation/lookups/router';
 import { useHistory } from 'react-router';
 import { HeaderText } from './Header.i18n';
@@ -27,7 +27,7 @@ type TProps = {
   hasOpened: boolean;
   openSidebar: () => void;
   closeSidebar: () => void;
-  openInfoDialog: OpenInfoDialogFn;
+  showInfoDialog: ShowInfoDialogFn;
 };
 
 const Header: React.FC<TProps> = ({
@@ -37,7 +37,7 @@ const Header: React.FC<TProps> = ({
   hasOpened,
   openSidebar,
   closeSidebar,
-  openInfoDialog,
+  showInfoDialog,
 }) => {
   const history = useHistory();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
@@ -58,15 +58,13 @@ const Header: React.FC<TProps> = ({
   }, [closeSidebar, hasOpened, openSidebar]);
 
   const onLogout = useCallback(() => {
-    openInfoDialog({
-      // FIXME: I18n対応
-      title: 'ログアウト確認',
-      context: 'ログアウトします。よろしいですか？',
+    showInfoDialog({
+      contexts: HeaderText.logoutComfirmDialog.contexts,
       ok: () => {
         Logger.log('ログアウト');
       },
     });
-  }, [openInfoDialog]);
+  }, [showInfoDialog]);
 
   const onOpenMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);

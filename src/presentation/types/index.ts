@@ -11,15 +11,17 @@ export type TLangCode = typeof ELangCode[keyof typeof ELangCode];
 // dialog
 type TBaseDialog = {
   hasOpened: boolean;
-  close: () => void;
-  title: string | TI18nObj;
-  context: string | TI18nObj;
+  close?: () => void;
+  title?: TI18nObj;
+  contexts?: TI18nObj | TI18nObj[];
 };
 
 export type TInfoDialog = TBaseDialog & {
-  lists?: string[];
   ok?: () => void;
 };
+export type ShowInfoDialogParam = Omit<TInfoDialog, 'hasOpened'>;
+export type ShowInfoDialogFn = (v: ShowInfoDialogParam) => void;
+
 export type TOkCancelDialog = TBaseDialog & {
   ok: () => void;
   cancel: () => void;
@@ -28,7 +30,6 @@ export type TYesNoDialog = TBaseDialog & {
   yes: () => void;
   no: () => void;
 };
-export type OpenInfoDialogFn = (v: Omit<TInfoDialog, 'hasOpened' | 'close'> & { close?: () => void }) => void;
 
 // Snackbar
 export type TNotifierProps = {

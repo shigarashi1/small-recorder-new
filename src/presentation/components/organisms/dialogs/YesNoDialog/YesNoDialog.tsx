@@ -5,8 +5,19 @@ import styles from './YesNoDialog.module.scss';
 
 import BaseDialog from '../BaseDialog/BaseDialog';
 import { TYesNoDialog } from '../../../../types';
+import { yesNoDialogDefaultText } from './YesNoDialog.i18n';
+import { voidFunction, toArray } from '@/library/helpers';
+import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
-const YesNoDialog: React.FC<TYesNoDialog> = ({ hasOpened, title, context, close, yes, no }) => {
+type TProps = TYesNoDialog;
+const YesNoDialog: React.FC<TProps> = ({
+  hasOpened,
+  title = yesNoDialogDefaultText.title,
+  contexts = yesNoDialogDefaultText.contexts,
+  close = voidFunction,
+  yes = voidFunction,
+  no = voidFunction,
+}) => {
   const onClose = () => {
     close();
   };
@@ -41,7 +52,9 @@ const YesNoDialog: React.FC<TYesNoDialog> = ({ hasOpened, title, context, close,
         title={title}
         areaLabeledby="dialog-selection"
       >
-        <p>{context}</p>
+        {toArray(contexts).map((context, index) => (
+          <I18nText key={`ok-cancel-dialog-contexts-${index}`} i18nObj={context} />
+        ))}
       </BaseDialog>
     </div>
   );

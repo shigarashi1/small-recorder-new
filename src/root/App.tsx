@@ -10,6 +10,7 @@ import AppRouter from '@/presentation/routers/AppRouter';
 import MainTemplate from '@/presentation/templates/MainTemplate/MainTemplate';
 import BrowserTab from '@/presentation/backgrounds/BrowserTab';
 import ErrorDialog from '@Components/organisms/dialogs/ErrorDialog/ErrorDialog.container';
+import InfoDialog from '@Components/organisms/dialogs/InfoDialog/InfoDialog.container';
 
 const store = configureStore({});
 const App: React.FC = () => {
@@ -23,6 +24,7 @@ const App: React.FC = () => {
           <ErrorBoundary>
             <Notifier />
             <BrowserTab />
+            <InfoDialog />
             <ErrorDialog />
           </ErrorBoundary>
         </SnackbarProvider>

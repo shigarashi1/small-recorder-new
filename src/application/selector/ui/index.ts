@@ -18,3 +18,7 @@ export const errorDialogSelector = {
   hasOpened: createSelector(featureSelector, (state) => state.errorDialog.hasOpened),
   errorInfo: createSelector(featureSelector, (state) => omit(['hasOpened'], state.errorDialog)),
 };
+export const infoDialogSelector = {
+  hasOpened: createSelector(featureSelector, (state) => state.infoDialog.hasOpened),
+  infoDialog: createSelector(featureSelector, (state) => omit(['hasOpened'], state.infoDialog)),
+};
