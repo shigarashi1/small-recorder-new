@@ -1,17 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { TErrorCode } from '@/library/types';
+import { TErrorPartial } from '@/library/types';
 
-type TState = {
+type TState = TErrorPartial & {
   hasOpened: boolean;
-  code?: string;
-  message?: string;
-  errorCode?: TErrorCode;
 };
 const initialState: TState = {
   hasOpened: false,
   code: undefined,
   errorCode: undefined,
   message: undefined,
+  stack: undefined,
+  params: [],
 };
 
 const _module = createSlice({
