@@ -1,6 +1,7 @@
 import { AppState } from '@/store';
 import { createSelector } from '@reduxjs/toolkit';
 import { uiReducers } from '@/store/ui';
+import { omit } from '@/library/ramda';
 
 const featureSelector = (state: AppState): ReturnType<typeof uiReducers> => state.ui;
 
@@ -12,4 +13,8 @@ export const languageSelector = {
 };
 export const notifierSelector = {
   notifierProps: createSelector(featureSelector, (state) => state.notifier),
+};
+export const errorDialogSelector = {
+  hasOpened: createSelector(featureSelector, (state) => state.errorDialog.hasOpened),
+  errorInfo: createSelector(featureSelector, (state) => omit(['hasOpened'], state.errorDialog)),
 };

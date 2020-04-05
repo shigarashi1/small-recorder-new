@@ -4,15 +4,16 @@ import Button from '@material-ui/core/Button';
 import styles from './ErrorDialog.module.scss';
 
 import BaseDialog from '../BaseDialog/BaseDialog';
-import { TError } from '@/library/types';
+import { errorDialogText } from './ErrorDialog.i18n';
 
 type TProps = {
-  hasOpen: boolean;
-  error: TError;
+  hasOpened: boolean;
+  code: string;
+  message: string;
   clear: () => void;
 };
 
-const ErrorDialog: React.FC<TProps> = ({ hasOpen, error, clear }) => {
+const ErrorDialog: React.FC<TProps> = ({ hasOpened, code = '', message = '', clear }) => {
   const onClose = () => {
     clear();
   };
@@ -26,13 +27,13 @@ const ErrorDialog: React.FC<TProps> = ({ hasOpen, error, clear }) => {
   return (
     <div id={styles.container}>
       <BaseDialog
-        hasOpened={hasOpen}
+        hasOpened={hasOpened}
         onClose={onClose}
-        title={`[${error.code}] システムエラーが発生しました.`}
+        title={errorDialogText.title}
         areaLabeledby="dialog-error"
         buttonChildren={buttonChildren}
       >
-        {error.message}
+        {`${message}(${code})`}
       </BaseDialog>
     </div>
   );

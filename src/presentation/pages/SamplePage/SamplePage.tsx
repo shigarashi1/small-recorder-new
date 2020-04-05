@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 
 import styles from './SamplePage.module.scss';
 import { Logger } from '@/library/models/logger';
+import { ApiError } from '@/library/models/error';
 
 type SampleProps = ComponentProps<typeof SampleCard>;
 const getComponent = (props: TProps): SampleProps[] => [
@@ -16,9 +17,19 @@ const getComponent = (props: TProps): SampleProps[] => [
     },
     children: <p>Sample Card</p>,
   },
+  {
+    title: 'ErrorDialog',
+    contexts: 'Show error Dialog',
+    onAction: () => {
+      props.throwError(new ApiError('E0000'));
+    },
+    children: <p>Sample Card</p>,
+  },
 ];
 
-type TProps = {};
+type TProps = {
+  throwError: (error: ApiError) => void;
+};
 const SamplePage: React.FC<TProps> = (props) => {
   const renderSample = (component: SampleProps, key: number) => {
     return (

@@ -26,6 +26,7 @@ import { sampleEpics } from '@/__sample';
 import { libraryEpics } from '@/library/redux-observable';
 import { applicationReducers } from './application';
 import { authModule } from './auth';
+import { eventListenerEpics } from '@/application/eventListener';
 
 // MEMO: anyを許容する
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -50,6 +51,7 @@ const rootReducer = (state: any, action: any) => {
 const rootEpic = combineEpics(
   sampleEpics, //
   libraryEpics,
+  eventListenerEpics,
 );
 const epicMiddleware = createEpicMiddleware<AnyAction, AnyAction, AppState>();
 const crashSentryReporter = (api: MiddlewareAPI) => (next: Dispatch<AnyAction>) => (action: any) => {

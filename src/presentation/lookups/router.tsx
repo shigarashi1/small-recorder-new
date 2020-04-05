@@ -12,7 +12,7 @@ import ForbiddenPage from '../pages/ForbiddenPage/ForbiddenPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import SignUpPage from '../pages/SignUpPage/SignUpPage';
 import PasswordResetPage from '../pages/PasswordResetPage/PasswordResetPage';
-import SamplePage from '../pages/SamplePage/SamplePage';
+import SamplePage from '../pages/SamplePage/SamplePage.container';
 import RecordPage from '../pages/RecordPage/RecordPage';
 import ReportPage from '../pages/ReportPage/ReportPage';
 import SearchPage from '../pages/SearchPage/SearchPage';
