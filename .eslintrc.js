@@ -65,6 +65,7 @@ module.exports = {
         map: [
           ["@Components", "./src/presentation/components"],
           ["@Events", "./src/presentation/events"],
+          ["@Selector", "./src/application/selector"],
           ["@DomainModels", "./src/domain/models"],
           ["@", "./src"]
         ],
