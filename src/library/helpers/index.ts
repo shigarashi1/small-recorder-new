@@ -1,6 +1,7 @@
 import { pipe, equals, propSatisfies, uniqBy } from '@/library/ramda';
 import parse from 'date-fns/parse';
 import format from 'date-fns/format';
+import { Logger } from '../models/logger';
 
 export const toArray = <T>(v?: T | T[]): T[] => (typeof v === 'undefined' ? [] : Array.isArray(v) ? v : [v]);
 export const mergeAndUniqArray = <T>(condition: (v: T) => string, prevData: T[], addData: T[]): T[] =>
@@ -22,3 +23,7 @@ export const toDate = (dateStr: string, fmt: TDateFormat = EDateFormat.Day): Dat
 export const toDateStr = (date: Date, fmt: TDateFormat = EDateFormat.Day): string => format(date, fmt);
 export const toDateStrFmt = (dateStr: string, fromFmt: TDateFormat, toFmt: TDateFormat): string =>
   toDateStr(toDate(dateStr, fromFmt), toFmt);
+
+export const voidFunction = (): void => {
+  Logger.log('called voidFunction');
+};

@@ -18,9 +18,9 @@ class BaseError extends Error {
       this._error = { errorCode: error, params };
       return;
     }
-    const code = error?.code || '';
-    const message = error?.message || '';
-    const stack = error?.stack || '';
+    const code = error?.code;
+    const message = error?.message;
+    const stack = error?.stack;
     this._error = { code, message, stack, params };
   }
 }
