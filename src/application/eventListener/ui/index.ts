@@ -1,4 +1,4 @@
 import { combineEpics } from 'redux-observable';
-import { errorDialogEpics } from './error-dialog';
+import { dialogsEpics } from './dialogs';
 
-export const uiEpics = combineEpics(errorDialogEpics);
+export const uiEpics = combineEpics(dialogsEpics);
