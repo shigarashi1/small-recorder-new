@@ -6,7 +6,13 @@ import Typography from '@material-ui/core/Typography';
 import styles from './SamplePage.module.scss';
 import { Logger } from '@/library/models/logger';
 import { ApiError } from '@/library/models/error';
+import { ActionFunction } from '@/library/redux-observable';
+import { infoDialogActions } from '@Events/ui/info-dialog';
 
+type TProps = {
+  throwError: (error: ApiError) => void;
+  showInfoDialog: ActionFunction<typeof infoDialogActions.show>;
+};
 type SampleProps = ComponentProps<typeof SampleCard>;
 const getComponent = (props: TProps): SampleProps[] => [
   {
@@ -19,17 +25,23 @@ const getComponent = (props: TProps): SampleProps[] => [
   },
   {
     title: 'ErrorDialog',
-    contexts: 'Show error Dialog',
+    contexts: 'Show ErrorDialog',
     onAction: () => {
       props.throwError(new ApiError('E0000'));
     },
-    children: <p>Sample Card</p>,
+  },
+  {
+    title: 'InfoDialog',
+    contexts: 'Show InfoDialog',
+    onAction: () => {
+      props.showInfoDialog({
+        title: { jp: 'sample' },
+        contexts: [{ jp: 'sample1' }, { jp: 'sample2sample2' }, { jp: 'sample3sample3sample3' }],
+      });
+    },
   },
 ];
 
-type TProps = {
-  throwError: (error: ApiError) => void;
-};
 const SamplePage: React.FC<TProps> = (props) => {
   const renderSample = (component: SampleProps, key: number) => {
     return (

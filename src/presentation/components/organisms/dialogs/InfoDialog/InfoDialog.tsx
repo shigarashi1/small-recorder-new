@@ -37,14 +37,18 @@ const InfoDialog: React.FC<TProps> = ({
 
   return (
     <div id={styles.container}>
-      <BaseDialog hasOpened={hasOpened} onClose={onClose} buttonChildren={buttonChildren} title={title}>
-        <React.Fragment>
-          <Typography variant="h6" gutterBottom={true}>
-            {toArray(contexts).map((context, index) => (
-              <I18nText key={`info-dialog-contexts-${index}`} i18nObj={context} />
-            ))}
+      <BaseDialog
+        hasOpened={hasOpened}
+        onClose={onClose}
+        buttonChildren={buttonChildren}
+        title={title}
+        areaLabeledby="info-dialog"
+      >
+        {toArray(contexts).map((context, index) => (
+          <Typography key={`info-dialog-contexts-${index}`} variant="h6" gutterBottom={true}>
+            <I18nText i18nObj={context} />
           </Typography>
-        </React.Fragment>
+        ))}
       </BaseDialog>
     </div>
   );

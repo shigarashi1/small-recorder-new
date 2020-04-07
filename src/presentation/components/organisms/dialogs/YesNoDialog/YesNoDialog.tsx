@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 import styles from './YesNoDialog.module.scss';
 
@@ -50,10 +51,12 @@ const YesNoDialog: React.FC<TProps> = ({
         onClose={onClose}
         buttonChildren={buttonChildren}
         title={title}
-        areaLabeledby="dialog-selection"
+        areaLabeledby="yes-no-dialog"
       >
         {toArray(contexts).map((context, index) => (
-          <I18nText key={`ok-cancel-dialog-contexts-${index}`} i18nObj={context} />
+          <Typography key={`yes-no-dialog-contexts-${index}`} variant="h6" gutterBottom={true}>
+            <I18nText i18nObj={context} />
+          </Typography>
         ))}
       </BaseDialog>
     </div>

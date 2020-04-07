@@ -1,5 +1,6 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 
 import styles from './OkCancelDialog.module.scss';
 
@@ -50,10 +51,12 @@ const OkCancelDialog: React.FC<TOkCancelDialog> = ({
         onClose={onClose}
         buttonChildren={buttonChildren}
         title={title}
-        areaLabeledby="dialog-ok-cancel"
+        areaLabeledby="ok-cancel-dialog"
       >
         {toArray(contexts).map((context, index) => (
-          <I18nText key={`ok-cancel-dialog-contexts-${index}`} i18nObj={context} />
+          <Typography key={`ok-cancel-dialog-contexts-${index}`} variant="h6" gutterBottom={true}>
+            <I18nText i18nObj={context} />
+          </Typography>
         ))}
       </BaseDialog>
     </div>

@@ -10,6 +10,7 @@ import { Observable, isObservable } from 'rxjs';
 // MEMO: anyを許容する
 /* eslint-disable @typescript-eslint/no-explicit-any */
 export type ActionParameters<T extends (...args: any[]) => any> = Parameters<T>[0];
+export type ActionFunction<T extends (...args: any[]) => any> = (param: Parameters<T>[0]) => void;
 export type WrapAction<T extends (...args: any[]) => any> = Action<ActionParameters<T>>;
 export type PromiseResolvedType<T> = T extends Promise<infer R> ? R : never;
 
