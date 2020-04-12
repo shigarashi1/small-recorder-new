@@ -11,6 +11,8 @@ import MainTemplate from '@/presentation/templates/MainTemplate/MainTemplate';
 import BrowserTab from '@/presentation/backgrounds/BrowserTab';
 import ErrorDialog from '@Components/organisms/dialogs/ErrorDialog/ErrorDialog.container';
 import InfoDialog from '@Components/organisms/dialogs/InfoDialog/InfoDialog.container';
+import OkCancelDialog from '@Components/organisms/dialogs/OkCancelDialog/OkCancelDialog.container';
+import YesNoDialog from '@Components/organisms/dialogs/YesNoDialog/YesNoDialog.container';
 
 const store = configureStore({});
 const App: React.FC = () => {
@@ -25,6 +27,8 @@ const App: React.FC = () => {
             <Notifier />
             <BrowserTab />
             <InfoDialog />
+            <OkCancelDialog />
+            <YesNoDialog />
             <ErrorDialog />
           </ErrorBoundary>
         </SnackbarProvider>

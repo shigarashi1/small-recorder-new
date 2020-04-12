@@ -22,3 +22,11 @@ export const infoDialogSelector = {
   hasOpened: createSelector(featureSelector, (state) => state.infoDialog.hasOpened),
   infoDialog: createSelector(featureSelector, (state) => omit(['hasOpened'], state.infoDialog)),
 };
+export const okCancelDialogSelector = {
+  hasOpened: createSelector(featureSelector, (state) => state.okCancelDialog.hasOpened),
+  okCancelDialog: createSelector(featureSelector, (state) => omit(['hasOpened'], state.okCancelDialog)),
+};
+export const yesNoDialogSelector = {
+  hasOpened: createSelector(featureSelector, (state) => state.yesNoDialog.hasOpened),
+  yesNoDialog: createSelector(featureSelector, (state) => omit(['hasOpened'], state.yesNoDialog)),
+};

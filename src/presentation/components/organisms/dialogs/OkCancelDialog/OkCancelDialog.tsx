@@ -11,8 +11,8 @@ import { okCancelDialogDefaultText } from './OkCancelDialog.i18n';
 import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
 type TProps = TOkCancelDialog;
-const OkCancelDialog: React.FC<TOkCancelDialog> = ({
-  hasOpened,
+const OkCancelDialog: React.FC<TProps> = ({
+  hasOpened = false,
   close = voidFunction,
   title = okCancelDialogDefaultText.title,
   contexts = okCancelDialogDefaultText.contexts,

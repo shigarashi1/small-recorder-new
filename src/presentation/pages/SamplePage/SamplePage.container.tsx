@@ -6,6 +6,8 @@ import { errorActions } from '@/root/error-actions';
 import { ApiError } from '@/library/models/error';
 import { infoDialogActions } from '@Events/ui/info-dialog';
 import { ActionParameters } from '@/library/redux-observable';
+import { okCancelDialogActions } from '@Events/ui/ok-cancel-dialog';
+import { yesNoDialogActions } from '@Events/ui/yes-no-dialog';
 
 const SamplePage: React.FC<{}> = () => {
   const dispatch = useDispatch();
@@ -21,7 +23,26 @@ const SamplePage: React.FC<{}> = () => {
     },
     [dispatch],
   );
+  const showOkCancelDialog = useCallback(
+    (v: ActionParameters<typeof okCancelDialogActions.show>) => {
+      dispatch(okCancelDialogActions.show(v));
+    },
+    [dispatch],
+  );
+  const showYesNoDialog = useCallback(
+    (v: ActionParameters<typeof yesNoDialogActions.show>) => {
+      dispatch(yesNoDialogActions.show(v));
+    },
+    [dispatch],
+  );
 
-  return <InjectedPageComponent throwError={throwError} showInfoDialog={showInfoDialog} />;
+  return (
+    <InjectedPageComponent
+      throwError={throwError}
+      showInfoDialog={showInfoDialog}
+      showOkCancelDialog={showOkCancelDialog}
+      showYesNoDialog={showYesNoDialog}
+    />
+  );
 };
 export default SamplePage;

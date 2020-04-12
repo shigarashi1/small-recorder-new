@@ -12,7 +12,7 @@ import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
 type TProps = TInfoDialog;
 const InfoDialog: React.FC<TProps> = ({
-  hasOpened,
+  hasOpened = false,
   title = infoDialogDefaultText.title,
   contexts = infoDialogDefaultText.contexts,
   ok = voidFunction,

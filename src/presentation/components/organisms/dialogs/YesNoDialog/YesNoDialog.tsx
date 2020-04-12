@@ -12,7 +12,7 @@ import I18nText from '@Components/atoms/I18nText/I18nText.container';
 
 type TProps = TYesNoDialog;
 const YesNoDialog: React.FC<TProps> = ({
-  hasOpened,
+  hasOpened = false,
   title = yesNoDialogDefaultText.title,
   contexts = yesNoDialogDefaultText.contexts,
   close = voidFunction,

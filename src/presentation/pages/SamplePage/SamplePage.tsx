@@ -8,10 +8,14 @@ import { Logger } from '@/library/models/logger';
 import { ApiError } from '@/library/models/error';
 import { ActionFunction } from '@/library/redux-observable';
 import { infoDialogActions } from '@Events/ui/info-dialog';
+import { okCancelDialogActions } from '@Events/ui/ok-cancel-dialog';
+import { yesNoDialogActions } from '@Events/ui/yes-no-dialog';
 
 type TProps = {
   throwError: (error: ApiError) => void;
   showInfoDialog: ActionFunction<typeof infoDialogActions.show>;
+  showOkCancelDialog: ActionFunction<typeof okCancelDialogActions.show>;
+  showYesNoDialog: ActionFunction<typeof yesNoDialogActions.show>;
 };
 type SampleProps = ComponentProps<typeof SampleCard>;
 const getComponent = (props: TProps): SampleProps[] => [
@@ -37,6 +41,41 @@ const getComponent = (props: TProps): SampleProps[] => [
       props.showInfoDialog({
         title: { jp: 'sample' },
         contexts: [{ jp: 'sample1' }, { jp: 'sample2sample2' }, { jp: 'sample3sample3sample3' }],
+        ok: () => {
+          window.alert('ok');
+        },
+      });
+    },
+  },
+  {
+    title: 'OkCancelDialog',
+    contexts: 'Show OkCancelDialog',
+    onAction: () => {
+      props.showOkCancelDialog({
+        title: { jp: 'sample' },
+        contexts: [{ jp: 'sample1' }, { jp: 'sample2sample2' }, { jp: 'sample3sample3sample3' }],
+        ok: () => {
+          window.alert('ok');
+        },
+        cancel: () => {
+          window.alert('cancel');
+        },
+      });
+    },
+  },
+  {
+    title: 'YesNoDialog',
+    contexts: 'Show YesNoDialog',
+    onAction: () => {
+      props.showYesNoDialog({
+        title: { jp: 'sample' },
+        contexts: [{ jp: 'sample1' }, { jp: 'sample2sample2' }, { jp: 'sample3sample3sample3' }],
+        yes: () => {
+          window.alert('yes');
+        },
+        no: () => {
+          window.alert('no');
+        },
       });
     },
   },
