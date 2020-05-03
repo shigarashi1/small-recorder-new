@@ -1,4 +1,4 @@
-import { TBaseDomainModel } from './base';
+import { TBaseDomainModel, Domain } from './base';
 import { NestedPartial } from '@/library/types';
 
 type TUser = TBaseDomainModel & {
@@ -6,5 +6,5 @@ type TUser = TBaseDomainModel & {
   username: string;
 };
 
-export type User = Readonly<TUser>;
+export type User = Domain<TUser>;
 export type PartialUser = NestedPartial<User>;

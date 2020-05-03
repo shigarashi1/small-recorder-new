@@ -17,6 +17,11 @@ import uniqBy from 'ramda/src/uniqBy';
 import pathOr from 'ramda/src/pathOr';
 import sortBy from 'ramda/src/sortBy';
 
+import eqProps from 'ramda/src/eqProps';
+import not from 'ramda/src/not';
+import times from 'ramda/src/times';
+import repeat from 'ramda/src/repeat';
+
 export {
   pipe,
   pick,
@@ -33,4 +38,8 @@ export {
   pathOr,
   sortBy,
   prop,
+  eqProps,
+  not,
+  times,
+  repeat,
 };

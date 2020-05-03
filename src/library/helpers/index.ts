@@ -1,4 +1,4 @@
-import { pipe, equals, propSatisfies, uniqBy } from '@/library/ramda';
+import { equals, uniqBy, not } from '@/library/ramda';
 import parse from 'date-fns/parse';
 import format from 'date-fns/format';
 import { Logger } from '../models/logger';
@@ -6,15 +6,12 @@ import { Logger } from '../models/logger';
 export const toArray = <T>(v?: T | T[]): T[] => (typeof v === 'undefined' ? [] : Array.isArray(v) ? v : [v]);
 export const mergeAndUniqArray = <T>(condition: (v: T) => string, prevData: T[], addData: T[]): T[] =>
   uniqBy(condition, [...addData, ...prevData]);
-
-export const notEquals = <T>(v1: T, v2: T): boolean => !equals(v1, v2);
-const _props = <T>(key: keyof T) => (obj: T): T[keyof T] => obj[key];
-export const notPropEq = <T>(key: keyof T, value: T[keyof T]): ((v: T) => boolean) => (obj2: T): boolean =>
-  !propSatisfies<T, T>(pipe(_props(key), equals(value)), String(key), obj2);
+export const notEquals = <T>(v1: T, v2: T): boolean => not(equals(v1, v2));
 
 export const EDateFormat = {
   Day: 'yyyy-MM-dd',
   DayJp: 'yyyy年MM月dd日',
+  DateTime: 'yyyy-MM-dd HH:mm:ss',
 } as const;
 export type TDateFormatKey = keyof typeof EDateFormat;
 export type TDateFormat = typeof EDateFormat[TDateFormatKey];

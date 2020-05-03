@@ -1,4 +1,4 @@
-import { TBaseDomainModel } from './base';
+import { TBaseDomainModel, Domain } from './base';
 import { NestedPartial } from '@/library/types';
 
 type TRecord = TBaseDomainModel & {
@@ -8,5 +8,5 @@ type TRecord = TBaseDomainModel & {
   record: string;
 };
 
-export type Record = Readonly<TRecord>;
+export type Record = Domain<TRecord>;
 export type PartialRecord = NestedPartial<Record>;

@@ -3,3 +3,5 @@ export type TBaseDomainModel = {
   createdAt: Date;
   updatedAt: Date;
 };
+
+export type Domain<T extends TBaseDomainModel> = Readonly<T>;

@@ -26,3 +26,9 @@ export type TError = {
   params: string[];
 };
 export type TErrorPartial = NestedPartial<TError>;
+
+// Lookups
+export type TLookupItem = {
+  id: string;
+  value: string;
+};

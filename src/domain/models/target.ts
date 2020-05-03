@@ -1,4 +1,4 @@
-import { TBaseDomainModel } from './base';
+import { TBaseDomainModel, Domain } from './base';
 import { NestedPartial } from '@/library/types';
 
 export const ETargetTerm = { Day: 'day', Week: 'week', Month: 'month' } as const;
@@ -11,5 +11,5 @@ type TTarget = TBaseDomainModel & {
   term: TTargetTerm;
 };
 
-export type Target = Readonly<TTarget>;
+export type Target = Domain<TTarget>;
 export type PartialTarget = NestedPartial<Target>;

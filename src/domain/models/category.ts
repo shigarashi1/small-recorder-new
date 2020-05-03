@@ -1,4 +1,4 @@
-import { TBaseDomainModel } from './base';
+import { TBaseDomainModel, Domain } from './base';
 import { NestedPartial } from '@/library/types';
 
 type TCategory = TBaseDomainModel & {
@@ -7,5 +7,5 @@ type TCategory = TBaseDomainModel & {
   hasDeleted: boolean;
 };
 
-export type Category = Readonly<TCategory>;
+export type Category = Domain<TCategory>;
 export type PartialCategory = NestedPartial<Category>;

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import InjectedPageComponent from './SamplePage';
 import { errorActions } from '@/root/error-actions';
@@ -8,8 +8,10 @@ import { infoDialogActions } from '@Events/ui/info-dialog';
 import { ActionParameters } from '@/library/redux-observable';
 import { okCancelDialogActions } from '@Events/ui/ok-cancel-dialog';
 import { yesNoDialogActions } from '@Events/ui/yes-no-dialog';
+import { languageSelector } from '@Selector/ui';
 
 const SamplePage: React.FC<{}> = () => {
+  const langCode = useSelector(languageSelector.langCode);
   const dispatch = useDispatch();
   const throwError = useCallback(
     (err: ApiError) => {
@@ -38,6 +40,7 @@ const SamplePage: React.FC<{}> = () => {
 
   return (
     <InjectedPageComponent
+      langCode={langCode}
       throwError={throwError}
       showInfoDialog={showInfoDialog}
       showOkCancelDialog={showOkCancelDialog}

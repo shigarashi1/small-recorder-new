@@ -6,6 +6,8 @@ import ReactDOM from 'react-dom';
 import App from './root/App';
 import * as serviceWorker from './serviceWorker';
 import ErrorBoundary from '@Components/others/ErrorBoundary/ErrorBoundary';
+import { showMockdata } from './presentation/mockups';
+showMockdata();
 
 ReactDOM.render(
   <ErrorBoundary isRoot={true}>
