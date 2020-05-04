@@ -7,7 +7,7 @@ import TopPage from '../pages/TopPage/TopPage';
 import HomePage from '../pages/HomePage/HomePage';
 import ManualPage from '../pages/ManualPage/ManualPage';
 import NotFoundPage from '../pages/NotFoundPage/NotFoundPage';
-import TechnologyPage from '../pages/TechnologyPage/TechnologyPage';
+import TechnologyPage from '../pages/TechnologyPage/TechnologyPage.container';
 import ForbiddenPage from '../pages/ForbiddenPage/ForbiddenPage';
 import LoginPage from '../pages/LoginPage/LoginPage';
 import SignUpPage from '../pages/SignUpPage/SignUpPage';

@@ -1,4 +1,17 @@
-// @types
 #root {
-  font-size: 10px;
+  .card{
+    .header{
+      font-size: 1rem;
+    }
+    .content {
+      max-height: 300px;
+      overflow-y: auto;
+    }
+  }
+  .list {
+    .listItem{
+      width: auto;
+    }
+  }
 }
+
