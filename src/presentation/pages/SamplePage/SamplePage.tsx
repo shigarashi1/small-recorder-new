@@ -2,6 +2,8 @@ import React, { ComponentProps, useState, useCallback } from 'react';
 import Grid from '@material-ui/core/Grid';
 import SampleCard from '@Components/molecules/SampleCard/SampleCard';
 import Typography from '@material-ui/core/Typography';
+import ContentDialog from '@Components/organisms/dialogs/ContentDialog/ContentDialog';
+import EditableTable from '@Components/organisms/EditableTable/EditableTable';
 
 import styles from './SamplePage.module.scss';
 import { Logger } from '@/library/models/logger';
@@ -10,8 +12,6 @@ import { ActionFunction } from '@/library/redux-observable';
 import { infoDialogActions } from '@Events/ui/info-dialog';
 import { okCancelDialogActions } from '@Events/ui/ok-cancel-dialog';
 import { yesNoDialogActions } from '@Events/ui/yes-no-dialog';
-import ContentDialog from '@Components/organisms/dialogs/ContentDialog/ContentDialog';
-import EditableTable from '@Components/organisms/EditableTable/EditableTable';
 import { Target } from '@DomainModels/target';
 import { getTargetTableConfig } from '@/presentation/lookups/table';
 import { CATEGORIES, TARGETS } from '@/presentation/mockups';
